@@ -1,16 +1,19 @@
 import "./App.css";
-import { HomeMaster } from "./pages/home";
-import { BrandMaster } from "./pages/BrandPage";
-import CommonProduct from "./pages/productsNewArrival/common";
-import { FooterMaster } from "./components/Footer";
+import { Routes, Route } from "react-router-dom";
+import { SignUpInMaster } from "./pageComponents/sign-up-in";
+import CartmasterPage from "./pages/cartMasterPage";
+import HomeMasterPage from "./pages/homeMasterPage";
+import NoPageFoundMasterPage from "./pages/noPageFound";
 
 function App() {
   return (
     <>
-      <HomeMaster />
-      <BrandMaster />
-      <CommonProduct />
-      <FooterMaster />
+      <Routes>
+        <Route path="/" element={<SignUpInMaster />} />
+        <Route path="/home" element={<HomeMasterPage />} exact />
+        <Route path="/cart" element={<CartmasterPage />} exact />
+        <Route path="/*" element={<NoPageFoundMasterPage />} />
+      </Routes>
     </>
   );
 }

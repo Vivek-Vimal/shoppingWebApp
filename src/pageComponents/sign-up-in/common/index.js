@@ -7,6 +7,7 @@ import { Text } from "../../../components/Text";
 import { TiStar } from "react-icons/ti";
 import Flex from "../../../components/Styling/Flex";
 import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const StyledSignUp = styled.form`
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -142,11 +143,13 @@ const SignUpIn = (props) => {
           onChange={onChange}
         />
       </div>
-
-      <Button
-        text={isUpIn === "signIn" ? "Sign In" : "Sign Up"}
-        m="1rem 0 0 0"
-      />
+      <Link to="/home" style={{ width: "100%" }}>
+        <Button
+          text={isUpIn === "signIn" ? "Sign In" : "Sign Up"}
+          m="1rem 0 0 0"
+          width="100%"
+        />
+      </Link>
     </StyledSignUp>
   );
 };

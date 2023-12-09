@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledHeading = styled.h1`
-  font-size: ${(props) => (props.fs ? props.fs : "36px")};
+  font-size: ${(props) => (props.fs ? props.fs : "28px")};
   font-weight: ${(props) => (props.fw ? props.fw : "700")};
   line-height: ${(props) => (props.lh ? props.lh : 0)};
   color: ${(props) => (props.color ? props.color : "#000000")};

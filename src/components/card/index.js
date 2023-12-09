@@ -1,3 +1,5 @@
 import Card from "./Card";
+import CartCard from "./CartCard";
+import SummaryCard from "./SummaryCard";
 
-export { Card }
+export { Card, CartCard, SummaryCard };

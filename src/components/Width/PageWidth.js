@@ -6,7 +6,7 @@ const StyledWidth = styled.section`
     props.full ? "100%" : props.width ? props.width : "1500px"};
   height: ${(props) => (props.height ? props.height : "auto")};
   display: flex;
-  align-items: ${(props) => (props.Left ? "left" : "center")};
+  align-items: ${(props) => (props.align ? props.align : "center")};
   justify-content: ${(props) => (props.jc ? props.jc : "space-between")};
   flex-direction: ${(props) =>
     props?.direction ? props?.direction : "column"};
@@ -32,7 +32,7 @@ const StyledWidth = styled.section`
 `;
 const PageWidth = ({
   children,
-  Left,
+  align,
   full,
   padding,
   margin,
@@ -46,7 +46,7 @@ const PageWidth = ({
 }) => {
   return (
     <StyledWidth
-      Left={Left}
+      align={align}
       full={full}
       padding={padding}
       margin={margin}

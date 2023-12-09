@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Flex from "../Styling/Flex";
 import { FiShoppingCart } from "react-icons/fi";
@@ -44,7 +44,7 @@ const Navbar = () => {
 
   return (
     <StyledNav>
-      <NavItem to="/" onClick={() => setActiveIndex(0)}>
+      <NavItem to="/home" onClick={() => setActiveIndex(0)}>
         <FcIcons8Cup size="3rem" style={{ margin: "0 0 0 5rem" }} />
       </NavItem>
 
@@ -76,7 +76,9 @@ const Navbar = () => {
         </Flex>
         <Flex width="8rem" jc="space-between" m="0 5rem 0 0">
           <CartContainer>
-            <FiShoppingCart size="2.5rem" />
+            <Link to="/cart">
+              <FiShoppingCart size="2.5rem" color="#000" />
+            </Link>
             <CartNumberDisplay>{itemDisplay}</CartNumberDisplay>
           </CartContainer>
           <RiAccountPinCircleFill size="2.5rem" />
