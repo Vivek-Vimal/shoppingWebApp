@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-// import Spinner from "../Spinner";
 
-const StyledButton = styled(motion.button)`
+const StyledButton = styled.button`
   color: ${(props) => (props.color ? props.color : "#242323")};
   font-size: ${(props) =>
     props.nav ? "18px" : props.fontSize ? props.fontSize : "20px"};
@@ -41,15 +40,6 @@ const StyledButton = styled(motion.button)`
 const Button = (props) => {
   const { onClick = () => {} } = props;
 
-  // const renderContent = () => {
-
-  //     if (props.isLoading) {
-  //         return <Spinner/>
-  //     }
-
-  //     return props.Text
-  // }
-
   return (
     <StyledButton
       onClick={() => {
@@ -60,13 +50,8 @@ const Button = (props) => {
       style={{
         opacity: props.disabled ? 0.3 : 1,
       }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.75 }}
     >
-      {
-        // renderContent()
-        props?.text ? props.text : "text"
-      }
+      {props?.text ? props.text : "text"}
     </StyledButton>
   );
 };

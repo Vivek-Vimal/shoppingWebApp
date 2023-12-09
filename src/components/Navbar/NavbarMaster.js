@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Flex from "../Styling/Flex";
 import { FiShoppingCart } from "react-icons/fi";
 import { RiAccountPinCircleFill } from "react-icons/ri";
 import { FcIcons8Cup } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -14,6 +15,8 @@ const StyledNav = styled.nav`
   height: 6rem;
   position: fixed;
   top: 0;
+  z-index: 99;
+  background-color: rgba(255, 255, 255, 0.75);
 `;
 
 const NavItem = styled(Link)`
@@ -21,17 +24,23 @@ const NavItem = styled(Link)`
   color: #000000;
 `;
 
+const CartContainer = styled.div`
+  position: relative;
+  cursor: pointer;
+`;
+
+const CartNumberDisplay = styled.span`
+  position: absolute;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 1.5rem;
+`;
+
 const Navbar = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  //const [navbar, setNavbar] = useState(false);
 
-  // const changeBackground = () => {
-  //   if (window.scrollY >= 50) {
-  //     setNavbar(true);
-  //   } else {
-  //     setNavbar(false);
-  //   }
-  // };
+  const number = useSelector((count) => count?.itemCount);
+  const itemDisplay = number > 0 ? number : null;
 
   return (
     <StyledNav>
@@ -66,7 +75,10 @@ const Navbar = () => {
           </NavItem>
         </Flex>
         <Flex width="8rem" jc="space-between" m="0 5rem 0 0">
-          <FiShoppingCart size="2.5rem" />
+          <CartContainer>
+            <FiShoppingCart size="2.5rem" />
+            <CartNumberDisplay>{itemDisplay}</CartNumberDisplay>
+          </CartContainer>
           <RiAccountPinCircleFill size="2.5rem" />
         </Flex>
       </Flex>

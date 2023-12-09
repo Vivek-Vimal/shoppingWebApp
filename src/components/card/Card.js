@@ -35,7 +35,7 @@ const Card = (props) => {
             width: "100%",
             height: "100%",
             border: "1.75rem 1.75rem 0 1.75rem",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         />
       </Image>
@@ -44,7 +44,7 @@ const Card = (props) => {
         <Text Text={props?.desc} />
         <Flex jc="space-between">
           <Heading Text={props?.price} />
-          <Button text="add to cart" width="10rem" />
+          <Button onClick={props?.addToCart} text="add to cart" width="10rem" />
         </Flex>
       </div>
     </Box>

@@ -7,12 +7,19 @@ import Flex from "../../../components/Styling/Flex";
 import img from "../../../assets/hero.png";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../../store/action";
 
 const CommonProduct = () => {
   const [isModelOpen, setIsModelOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const modalFun = () => {
     setIsModelOpen(true);
+  };
+
+  const addToCart = () => {
+    dispatch({ ...addItem, payload: 123 });
   };
 
   return (
@@ -28,6 +35,7 @@ const CommonProduct = () => {
             desc="desc worling ...."
             price="30"
             img={img}
+            addToCart={addToCart}
           />
           <Modal
             open={isModelOpen}
