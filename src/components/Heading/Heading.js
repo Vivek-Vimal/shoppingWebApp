@@ -4,7 +4,7 @@ import styled from "styled-components";
 const StyledHeading = styled.h1`
   font-size: ${(props) => (props.fs ? props.fs : "36px")};
   font-weight: ${(props) => (props.fw ? props.fw : "700")};
-  line-height: ${(props) => (props.lh ? props.lh : "")};
+  line-height: ${(props) => (props.lh ? props.lh : 0)};
   color: ${(props) => (props.color ? props.color : "#000000")};
   background: ${(props) =>
     props.gradient ? "linear-gradient(#5E8CC9, #6166AE)" : null};
@@ -16,7 +16,8 @@ const StyledHeading = styled.h1`
   letter-spacing: ${(props) => (props.ls ? props.ls : "")};
   text-decoration: none;
   text-transform: ${(props) => (props.capital ? "upper-case" : "lower-case")};
-  width: ${(props) => (props.width ? props.width : "")};
+  width: ${(props) => (props.width ? props.width : "initial")};
+  font-style: ${(props) => (props?.italic ? "italic" : "normal")};
 
   @media only screen and (max-width: 1200px) {
     font-size: ${(props) => (props.xm ? props.xm : "25px")};

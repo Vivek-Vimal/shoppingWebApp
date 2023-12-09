@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import Spinner from "../Spinner";
+// import Spinner from "../Spinner";
 
 const StyledButton = styled(motion.button)`
   color: ${(props) => (props.color ? props.color : "#242323")};
@@ -15,12 +15,12 @@ const StyledButton = styled(motion.button)`
   border-radius: ${(props) => (props.br ? props.br : "4px")};
   border: ${(props) => (props.lightBorder ? "1.2px solid #FFFFFF" : "none")};
   cursor: pointer;
-  min-width: ${(props) =>
-    props.width ? props.width : props.navWidth ? props.navWidth : "15rem"};
+  min-width: ${(props) => (props.width ? props.width : "15rem")};
   background: ${(props) => (props.bg ? props.bg : "#EBD96B")};
   margin: ${(props) => (props.m ? props.m : "")};
   font-family: "Montserrat", sans-serif;
   height: ${(props) => (props.height ? props.height : "")};
+  z-index: 6;
 
   @media (max-width: 768px) {
     max-width: ${(props) =>

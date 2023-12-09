@@ -8,6 +8,8 @@ const StyledFlex = styled.div`
   flex-direction: ${(props) => (props.column ? "column" : "row")};
   justify-content: ${(props) => (props.jc ? props.jc : "flex-start")};
   margin: ${(props) => (props.m ? props.m : "")};
+  flex-wrap: ${(props) => (props?.wrap ? "wrap" : "nowrap")};
+  padding: ${(props) => (props?.p ? props?.p : "")};
 
   @media (max-width: 1100px) {
     flex-direction: ${(props) =>
@@ -40,6 +42,8 @@ const Flex = ({
   noCenter,
   width,
   sM,
+  wrap,
+  p,
 }) => {
   return (
     <StyledFlex
@@ -52,6 +56,8 @@ const Flex = ({
       noCenter={noCenter}
       width={width}
       sM={sM}
+      wrap={wrap}
+      p={p}
     >
       {children}
     </StyledFlex>

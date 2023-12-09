@@ -3,16 +3,21 @@ import styled from "styled-components";
 
 const StyledWidth = styled.section`
   width: ${(props) =>
-    props.full ? "100%" : props.width ? props.width : "1400px"};
-  height: auto;
+    props.full ? "100%" : props.width ? props.width : "1500px"};
+  height: ${(props) => (props.height ? props.height : "auto")};
   display: flex;
   align-items: ${(props) => (props.Left ? "left" : "center")};
-  justify-content: space-between;
-  flex-direction: column;
+  justify-content: ${(props) => (props.jc ? props.jc : "space-between")};
+  flex-direction: ${(props) =>
+    props?.direction ? props?.direction : "column"};
   padding: ${(props) => (props.padding ? props.padding : "0")};
   margin: ${(props) => (props.margin ? props.margin : "0")};
   background-color: ${(props) => (props?.bg ? props?.bg : "")};
   border-radius: 1.75rem;
+  box-shadow: ${(props) =>
+    props?.boxShadow
+      ? "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px"
+      : null};
 
   @media only screen and (max-width: 1600px) {
     width: ${(props) => (props.full ? "100%" : "95%")};
@@ -34,6 +39,10 @@ const PageWidth = ({
   sp,
   width,
   bg,
+  height,
+  boxShadow,
+  direction,
+  jc,
 }) => {
   return (
     <StyledWidth
@@ -44,6 +53,10 @@ const PageWidth = ({
       sp={sp}
       width={width}
       bg={bg}
+      height={height}
+      boxShadow={boxShadow}
+      direction={direction}
+      jc={jc}
     >
       {children}
     </StyledWidth>

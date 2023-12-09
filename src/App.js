@@ -1,12 +1,16 @@
 import "./App.css";
-// import { SignUpInMaster } from "./pages/sign-up-in";
 import { HomeMaster } from "./pages/home";
+import { BrandMaster } from "./pages/BrandPage";
+import CommonProduct from "./pages/productsNewArrival/common";
+import { FooterMaster } from "./components/Footer";
 
 function App() {
   return (
     <>
-      {/* <SignUpInMaster /> */}
       <HomeMaster />
+      <BrandMaster />
+      <CommonProduct />
+      <FooterMaster />
     </>
   );
 }

@@ -12,7 +12,7 @@ const StyledNav = styled.nav`
   justify-content: space-between;
   width: 100%;
   height: 6rem;
-  position: absolute;
+  position: fixed;
   top: 0;
 `;
 
@@ -35,7 +35,7 @@ const Navbar = () => {
 
   return (
     <StyledNav>
-      <NavItem to="/">
+      <NavItem to="/" onClick={() => setActiveIndex(0)}>
         <FcIcons8Cup size="3rem" style={{ margin: "0 0 0 5rem" }} />
       </NavItem>
 

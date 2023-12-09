@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const StyledPageLayout = styled.section`
   width: 100%;
-  min-height: 100vh;
+  min-height: ${(props) => (props.height ? props.height : "100vh")};
   display: flex;
   align-items: center;
   justify-content: ${(props) => (props.start ? "flex-start" : "center")};
@@ -17,9 +17,15 @@ const StyledPageLayout = styled.section`
   overflow-x: hidden;
 `;
 
-const PageLayout = ({ children, bg, start, padding, img }) => {
+const PageLayout = ({ children, bg, start, padding, img, height }) => {
   return (
-    <StyledPageLayout bg={bg} padding={padding} start={start} img={img}>
+    <StyledPageLayout
+      bg={bg}
+      padding={padding}
+      start={start}
+      img={img}
+      height={height}
+    >
       {children}
     </StyledPageLayout>
   );
