@@ -2,15 +2,16 @@ import React from "react";
 import { PageLayout } from "../PageLayout";
 import { PageWidth } from "../Width";
 import Flex from "../Styling/Flex";
+import { Text } from "../Text";
 
 const FooterMaster = () => {
   return (
     <PageLayout bg="#000000" height="10rem">
-      <PageWidth>
-        <Flex>
+      <PageWidth jc="space-between" direction="row">
+        <Flex width="20rem">
           <svg
-            width="15"
-            height="15"
+            width="35"
+            height="35"
             viewBox="0 0 15 15"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -28,8 +29,8 @@ const FooterMaster = () => {
             />
           </svg>
           <svg
-            width="15"
-            height="15"
+            width="35"
+            height="35"
             viewBox="0 0 15 15"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -48,8 +49,8 @@ const FooterMaster = () => {
             />
           </svg>
           <svg
-            width="15"
-            height="15"
+            width="35"
+            height="35"
             viewBox="0 0 15 15"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -68,8 +69,8 @@ const FooterMaster = () => {
             />
           </svg>
           <svg
-            width="15"
-            height="15"
+            width="35"
+            height="35"
             viewBox="0 0 15 15"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -88,6 +89,7 @@ const FooterMaster = () => {
             />
           </svg>
         </Flex>
+        <Text Text="@2024 All rights reserved" color="#EBD96B" />
       </PageWidth>
     </PageLayout>
   );

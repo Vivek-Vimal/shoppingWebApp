@@ -14,6 +14,7 @@ const initialState = {
 export const cartReducer = (state = initialState, action) => {
   console.log(`state`, state);
   console.log(`action`, action);
+  let index = state.cart.findIndex((e) => e?.id === action?.payload);
   switch (action?.type) {
     case ADD_ITEM:
       return {
@@ -22,11 +23,30 @@ export const cartReducer = (state = initialState, action) => {
         itemCount: state?.itemCount + 1,
       };
     case REMOVE_ITEM:
-      return {};
+      let currentItemCount = state.cart[index]?.count;
+      return {
+        ...state,
+        [state.cart]: state.cart.slice(index, 1),
+        itemCount: state?.itemCount - currentItemCount,
+      };
     case INCREMENT:
-      return {};
+      return {
+        ...state,
+        [state.cart]: {
+          ...state.cart,
+          [state.cart[index]?.count]: state.cart[index]?.count + 1,
+        },
+        itemCount: state?.itemCount + 1,
+      };
     case DECREMENT:
-      return {};
+      return {
+        ...state,
+        [state.cart]: {
+          ...state.cart,
+          [state.cart[index]?.count]: state.cart[index]?.count - 1,
+        },
+        itemCount: state.itemCount - 1,
+      };
     case CLEAR_ALL:
       return initialState;
     default:

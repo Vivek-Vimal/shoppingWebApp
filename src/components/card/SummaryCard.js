@@ -29,7 +29,7 @@ const SummaryCard = () => {
       </Flex>
       <Line m="1rem 0 0 0" />
       <Flex jc="space-between" p="1.5rem 0">
-        <Heading Text="2 items" fs="1rem" />
+        <Heading Text="Total" fs="1rem" />
         <Heading Text="2 items" fs="1rem" />
       </Flex>
       <Button text="Checkout" width="100%" />

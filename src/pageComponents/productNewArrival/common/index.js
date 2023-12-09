@@ -9,10 +9,13 @@ import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../../store/action";
+import { DetailCard } from "../../../components/card";
 
 const CommonProduct = () => {
   const [isModelOpen, setIsModelOpen] = useState(false);
   const dispatch = useDispatch();
+
+  let path = window.location.pathname;
 
   const modalFun = () => {
     setIsModelOpen(true);
@@ -26,7 +29,7 @@ const CommonProduct = () => {
     <PageLayout>
       <PageWidth>
         <Flex>
-          <Heading Text="New Arrivals" />
+          <Heading Text={path === "/product" ? "Products" : "New Arrivals"} />
         </Flex>
         <Flex wrap>
           <Card
@@ -41,8 +44,9 @@ const CommonProduct = () => {
             open={isModelOpen}
             onClose={() => setIsModelOpen(false)}
             center
+            styles={{ width: "45rem" }}
           >
-            <h2>Simple centered modal</h2>
+            <DetailCard />
           </Modal>
         </Flex>
       </PageWidth>

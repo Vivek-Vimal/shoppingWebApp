@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Flex from "../Styling/Flex";
 import { FiShoppingCart } from "react-icons/fi";
@@ -21,7 +21,6 @@ const StyledNav = styled.nav`
 
 const NavItem = styled(Link)`
   text-decoration: none;
-  color: #000000;
 `;
 
 const CartContainer = styled.div`
@@ -37,14 +36,14 @@ const CartNumberDisplay = styled.span`
 `;
 
 const Navbar = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
   const number = useSelector((count) => count?.itemCount);
   const itemDisplay = number > 0 ? number : null;
 
+  let path = window.location.pathname;
+
   return (
     <StyledNav>
-      <NavItem to="/home" onClick={() => setActiveIndex(0)}>
+      <NavItem to="/home">
         <FcIcons8Cup size="3rem" style={{ margin: "0 0 0 5rem" }} />
       </NavItem>
 
@@ -52,24 +51,21 @@ const Navbar = () => {
         <Flex width="25rem" jc="space-between">
           <NavItem
             to="/dashboard"
-            onClick={() => setActiveIndex(1)}
-            style={{ color: activeIndex === 1 ? "green" : "#000" }}
+            style={{ color: path === "/dashboard" ? "green" : "#000" }}
           >
             DASHBOARD
           </NavItem>
 
           <NavItem
             to="/product"
-            onClick={() => setActiveIndex(2)}
-            style={{ color: activeIndex === 2 ? "green" : "#000" }}
+            style={{ color: path === "/product" ? "green" : "#000" }}
           >
             PRODUCT
           </NavItem>
 
           <NavItem
             to="/account"
-            onClick={() => setActiveIndex(3)}
-            style={{ color: activeIndex === 3 ? "green" : "#000" }}
+            style={{ color: path === "/account" ? "green" : "#000" }}
           >
             ACCOUNT
           </NavItem>
@@ -77,7 +73,10 @@ const Navbar = () => {
         <Flex width="8rem" jc="space-between" m="0 5rem 0 0">
           <CartContainer>
             <Link to="/cart">
-              <FiShoppingCart size="2.5rem" color="#000" />
+              <FiShoppingCart
+                size="2.5rem"
+                color={path === "/cart" ? "green" : "#000"}
+              />
             </Link>
             <CartNumberDisplay>{itemDisplay}</CartNumberDisplay>
           </CartContainer>

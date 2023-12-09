@@ -8,6 +8,7 @@ import { Heading } from "../../components/Heading";
 import { Text } from "../../components/Text";
 import { Button } from "../../components/Button";
 import Carousel from "nuka-carousel";
+import { Link } from "react-router-dom";
 
 const LeftHeroSec = styled.div``;
 
@@ -35,8 +36,9 @@ const HomeMaster = () => {
           <Heading Text="PRODUCTS" fs="4rem" lh="0.75rem" />
 
           <Text Text="Live for Influential and Innovative fashion!" />
-
-          <Button text="Shop Now" m="1rem 0 0 0" />
+          <Link to="/product">
+            <Button text="Shop Now" m="1rem 0 0 0" />
+          </Link>
         </LeftHeroSec>
         <RightHeroSec>
           <Carousel cellAlign="center" style={{ borderRadius: "1rem" }}>
