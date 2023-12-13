@@ -6,12 +6,12 @@ import { Text } from "../Text";
 import img from "../../assets/hero.png";
 
 const StyledCard = styled.div`
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  //box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   display: flex;
-  width: 100%;
+  width: 45rem;
   height: 35rem;
   position: relative;
-  margin: 2rem 0 0 0;
+  margin: 2rem 2rem 0 2rem;
 `;
 
 const Image = styled.div`

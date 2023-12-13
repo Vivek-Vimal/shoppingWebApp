@@ -7,8 +7,8 @@ import { Line } from "../Line";
 import { Button } from "../Button";
 
 const StyledCard = styled.div`
-  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
-    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
   width: 30rem;
   position: relative;
   padding: 3rem;

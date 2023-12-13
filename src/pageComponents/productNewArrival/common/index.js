@@ -10,6 +10,7 @@ import { Modal } from "react-responsive-modal";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../../store/action";
 import { DetailCard } from "../../../components/card";
+import { FilterAndSearchMaster } from "../../../components/FilterAndSearch";
 
 const CommonProduct = () => {
   const [isModelOpen, setIsModelOpen] = useState(false);
@@ -26,11 +27,18 @@ const CommonProduct = () => {
   };
 
   return (
-    <PageLayout>
+    <PageLayout
+      start={path === "/product" ? true : false}
+      padding={path === "/product" ? "7rem 0 0 0" : "0"}
+    >
       <PageWidth>
         <Flex>
-          <Heading Text={path === "/product" ? "Products" : "New Arrivals"} />
+          <Heading
+            Text={path === "/product" ? "Products" : "New Arrivals"}
+            fs="3rem"
+          />
         </Flex>
+        {path === "/product" && <FilterAndSearchMaster />}
         <Flex wrap>
           <Card
             modalFun={modalFun}
@@ -44,7 +52,6 @@ const CommonProduct = () => {
             open={isModelOpen}
             onClose={() => setIsModelOpen(false)}
             center
-            styles={{ width: "45rem" }}
           >
             <DetailCard />
           </Modal>

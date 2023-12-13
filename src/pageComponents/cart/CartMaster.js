@@ -12,10 +12,22 @@ const CartMaster = () => {
   const cartItem = useSelector((item) => item?.cart?.length);
 
   return (
-    <PageLayout>
+    <PageLayout
+      start={cartItem > 0 ? true : false}
+      padding={cartItem > 0 ? "7rem 0 0 0" : "0"}
+    >
+      {cartItem > 0 && (
+        <PageWidth height="6rem">
+          <Flex>
+            <Heading Text="Checkout" fs="3rem" />
+          </Flex>
+        </PageWidth>
+      )}
+
       <PageWidth
         direction={cartItem > 0 ? "row" : "column"}
         align={cartItem > 0 ? "start" : "center"}
+        width="1200px"
       >
         {cartItem > 0 ? (
           <>

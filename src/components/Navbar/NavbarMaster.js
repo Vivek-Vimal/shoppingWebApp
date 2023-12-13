@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Flex from "../Styling/Flex";
 import { FiShoppingCart } from "react-icons/fi";

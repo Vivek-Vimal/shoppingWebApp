@@ -11,6 +11,8 @@ const StyledFlex = styled.div`
   flex-wrap: ${(props) => (props?.wrap ? "wrap" : "nowrap")};
   padding: ${(props) => (props?.p ? props?.p : "")};
   height: ${(props) => (props?.height ? props?.height : "")};
+  position: ${(props) => (props?.position ? props?.position : "")};
+  box-shadow: ${(props) => (props?.bs ? props?.bs : "")};
 
   @media (max-width: 1100px) {
     flex-direction: ${(props) =>
@@ -46,6 +48,8 @@ const Flex = ({
   wrap,
   p,
   height,
+  position,
+  bs,
 }) => {
   return (
     <StyledFlex
@@ -61,6 +65,8 @@ const Flex = ({
       wrap={wrap}
       p={p}
       height={height}
+      position={position}
+      bs={bs}
     >
       {children}
     </StyledFlex>
