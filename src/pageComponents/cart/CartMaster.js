@@ -9,14 +9,17 @@ import { Button } from "../../components/Button";
 import { Link } from "react-router-dom";
 
 const CartMaster = () => {
-  const cartItem = useSelector((item) => item?.cart?.length);
+  const cartItem = useSelector((item) => item?.cart);
+  const cartLenght = cartItem?.length > 0 ? true : false;
+
+  console.log(`cartItem`, cartItem);
 
   return (
     <PageLayout
-      start={cartItem > 0 ? true : false}
-      padding={cartItem > 0 ? "7rem 0 0 0" : "0"}
+      start={cartLenght ? true : false}
+      padding={cartLenght ? "7rem 0 0 0" : "0"}
     >
-      {cartItem > 0 && (
+      {cartLenght && (
         <PageWidth height="6rem">
           <Flex>
             <Heading Text="Checkout" fs="3rem" />
@@ -25,14 +28,21 @@ const CartMaster = () => {
       )}
 
       <PageWidth
-        direction={cartItem > 0 ? "row" : "column"}
-        align={cartItem > 0 ? "start" : "center"}
+        direction={cartLenght ? "row" : "column"}
+        align={cartLenght ? "start" : "center"}
         width="1200px"
       >
-        {cartItem > 0 ? (
+        {cartLenght ? (
           <>
             <Flex column noCenter>
-              <CartCard />
+              {cartItem?.map((item) => (
+                <CartCard
+                  img={item?.image}
+                  price={item?.price}
+                  title={item?.title}
+                  category={item?.category}
+                />
+              ))}
             </Flex>
             <SummaryCard />
           </>

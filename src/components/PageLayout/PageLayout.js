@@ -15,9 +15,10 @@ const StyledPageLayout = styled.section`
   background-attachment: fixed;
   background-repeat: no-repeat;
   overflow-x: hidden;
+  margin: ${(props) => (props?.m ? props?.m : "")};
 `;
 
-const PageLayout = ({ children, bg, start, padding, img, height }) => {
+const PageLayout = ({ children, bg, start, padding, img, height, m }) => {
   return (
     <StyledPageLayout
       bg={bg}
@@ -25,6 +26,7 @@ const PageLayout = ({ children, bg, start, padding, img, height }) => {
       start={start}
       img={img}
       height={height}
+      m={m}
     >
       {children}
     </StyledPageLayout>

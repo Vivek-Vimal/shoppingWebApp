@@ -1,29 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PageLayout } from "../../../components/PageLayout";
 import { PageWidth } from "../../../components/Width";
 import { Heading } from "../../../components/Heading";
 import { Card } from "../../../components/card";
 import Flex from "../../../components/Styling/Flex";
-import img from "../../../assets/hero.png";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../../store/action";
 import { DetailCard } from "../../../components/card";
 import { FilterAndSearchMaster } from "../../../components/FilterAndSearch";
+import { productData } from "../DummyData";
 
 const CommonProduct = () => {
   const [isModelOpen, setIsModelOpen] = useState(false);
+  const [currentItem, setCurrentItem] = useState("");
   const dispatch = useDispatch();
 
   let path = window.location.pathname;
 
-  const modalFun = () => {
+  const modalFun = (item) => {
     setIsModelOpen(true);
+    setCurrentItem(item);
   };
 
-  const addToCart = () => {
-    dispatch({ ...addItem, payload: 123 });
+  const addToCart = (item) => {
+    dispatch({ ...addItem, payload: item });
   };
 
   return (
@@ -40,20 +42,23 @@ const CommonProduct = () => {
         </Flex>
         {path === "/product" && <FilterAndSearchMaster />}
         <Flex wrap>
-          <Card
-            modalFun={modalFun}
-            title="Saucage"
-            desc="desc worling ...."
-            price="30"
-            img={img}
-            addToCart={addToCart}
-          />
+          {productData?.map((item) => (
+            <Card
+              modalFun={() => modalFun(item)}
+              title={item?.title}
+              desc={item?.description}
+              price={item?.price}
+              img={item?.image}
+              addToCart={() => addToCart(item)}
+            />
+          ))}
+
           <Modal
             open={isModelOpen}
             onClose={() => setIsModelOpen(false)}
             center
           >
-            <DetailCard />
+            <DetailCard currentItem={currentItem} />
           </Modal>
         </Flex>
       </PageWidth>

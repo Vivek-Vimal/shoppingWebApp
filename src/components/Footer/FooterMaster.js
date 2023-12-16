@@ -6,7 +6,7 @@ import { Text } from "../Text";
 
 const FooterMaster = () => {
   return (
-    <PageLayout bg="#000000" height="10rem">
+    <PageLayout bg="#000000" height="10rem" m="2rem 0 0 0">
       <PageWidth jc="space-between" direction="row">
         <Flex width="20rem">
           <svg

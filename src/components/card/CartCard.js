@@ -27,7 +27,9 @@ const ItemCount = styled.div`
   padding: 0.5rem;
 `;
 
-const CartCard = () => {
+const CartCard = (props) => {
+  const { img, title, price, category } = props;
+  const displayTitle = title?.length > 30 ? title.slice(0, 30) + "..." : title;
   return (
     <StyledCard>
       <Image>
@@ -35,8 +37,8 @@ const CartCard = () => {
       </Image>
       <Flex noCenter column jc="space-between" p="1rem 2rem">
         <div>
-          <Heading Text="Item Name" fs="1.5rem" />
-          <Text Text="2 items" fs="1rem" />
+          <Heading Text={displayTitle} fs="1.5rem" />
+          <Text Text={category} fs="1rem" />
         </div>
         <Flex jc="space-between">
           <ItemCount>
@@ -45,14 +47,14 @@ const CartCard = () => {
                 cursor: "pointer",
               }}
             />
-            <span style={{ margin: "0 1.5rem" }}></span>
+            <span style={{ margin: "0 1.5rem" }}>{"1"}</span>
             <FaPlus
               style={{
                 cursor: "pointer",
               }}
             />
           </ItemCount>
-          <Heading Text="30" fs="1.5rem" />
+          <Heading Text={price} fs="1.5rem" />
         </Flex>
       </Flex>
       <IoMdClose

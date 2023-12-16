@@ -3,11 +3,8 @@ import { Heading } from "../Heading";
 import Flex from "../Styling/Flex";
 import styled from "styled-components";
 import { Text } from "../Text";
-import img from "../../assets/hero.png";
 
 const StyledCard = styled.div`
-  //box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  display: flex;
   width: 45rem;
   height: 35rem;
   position: relative;
@@ -19,15 +16,26 @@ const Image = styled.div`
   height: 15rem;
 `;
 
-const DetailCard = () => {
+const DetailCard = (props) => {
+  const { currentItem } = props;
+  console.log(`currentItem`, currentItem);
   return (
     <StyledCard>
-      <Image>
-        <img src={img} alt="" style={{ width: "100%", height: "100%" }} />
-      </Image>
-      <Flex noCenter column jc="space-between" p="1rem 2rem">
-        <Heading Text="Item Name" fs="1.5rem" />
-        <Text Text="2 items" fs="1rem" />
+      <Flex noCenter>
+        <Image>
+          <img
+            src={currentItem?.image}
+            alt=""
+            style={{ width: "100%", height: "100%" }}
+          />
+        </Image>
+        <Flex noCenter column jc="space-between" p="1rem 2rem">
+          <Heading Text={currentItem?.title} fs="1.75rem" lh="2rem" />
+          <Text Text={currentItem?.category} fs="1rem" />
+        </Flex>
+      </Flex>
+      <Flex m="1rem 0 0 0">
+        <Text Text={currentItem?.description} fs="1.25rem" lh="1.75rem" />
       </Flex>
     </StyledCard>
   );
