@@ -3,23 +3,49 @@ import { PageLayout } from "../../components/PageLayout";
 import { PageWidth } from "../../components/Width";
 import { CartCard, SummaryCard } from "../../components/card";
 import Flex from "../../components/Styling/Flex";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Heading } from "../../components/Heading";
 import { Button } from "../../components/Button";
 import { Link } from "react-router-dom";
+import { removeItem, incItem, decItem } from "../../store/action";
 
 const CartMaster = () => {
   const cartItem = useSelector((item) => item?.cart);
-  const cartLenght = cartItem?.length > 0 ? true : false;
+  const cartLength = cartItem?.length > 0 ? true : false;
 
-  console.log(`cartItem`, cartItem);
+  const dispatch = useDispatch();
+
+  const closeCartCard = (id) => {
+    dispatch({ ...removeItem, payload: { id } });
+  };
+
+  const onIncDecItem = (props) => {
+    dispatch({
+      type:
+        props?.type === "inc"
+          ? incItem?.type
+          : props?.type === "dec"
+          ? decItem?.type
+          : null,
+      payload: { id: props?.id },
+    });
+  };
+
+  const cardProp = {
+    closeCartCard,
+    onIncDecItem,
+  };
+
+  const summaryCardProp = {
+    cartItem,
+  };
 
   return (
     <PageLayout
-      start={cartLenght ? true : false}
-      padding={cartLenght ? "7rem 0 0 0" : "0"}
+      start={cartLength ? true : false}
+      padding={cartLength ? "7rem 0 0 0" : "0"}
     >
-      {cartLenght && (
+      {cartLength && (
         <PageWidth height="6rem">
           <Flex>
             <Heading Text="Checkout" fs="3rem" />
@@ -28,11 +54,12 @@ const CartMaster = () => {
       )}
 
       <PageWidth
-        direction={cartLenght ? "row" : "column"}
-        align={cartLenght ? "start" : "center"}
-        width="1200px"
+        direction={cartLength ? "row" : "column"}
+        align={cartLength ? "start" : "center"}
+        key={cartLength}
+        width="1400px"
       >
-        {cartLenght ? (
+        {cartLength ? (
           <>
             <Flex column noCenter>
               {cartItem?.map((item) => (
@@ -41,10 +68,13 @@ const CartMaster = () => {
                   price={item?.price}
                   title={item?.title}
                   category={item?.category}
+                  currentItemCount={item?.currentCount}
+                  id={item?.id}
+                  {...cardProp}
                 />
               ))}
             </Flex>
-            <SummaryCard />
+            <SummaryCard {...summaryCardProp} />
           </>
         ) : (
           <>

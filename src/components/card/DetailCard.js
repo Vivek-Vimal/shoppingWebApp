@@ -6,7 +6,6 @@ import { Text } from "../Text";
 
 const StyledCard = styled.div`
   width: 45rem;
-  height: 35rem;
   position: relative;
   margin: 2rem 2rem 0 2rem;
 `;
@@ -18,7 +17,7 @@ const Image = styled.div`
 
 const DetailCard = (props) => {
   const { currentItem } = props;
-  console.log(`currentItem`, currentItem);
+
   return (
     <StyledCard>
       <Flex noCenter>

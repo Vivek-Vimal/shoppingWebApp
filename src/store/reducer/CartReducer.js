@@ -11,42 +11,74 @@ const initialState = {
   cart: [],
 };
 
+let defaultPrice = [];
+
 export const cartReducer = (state = initialState, action) => {
-  console.log(`state`, state);
   console.log(`action`, action);
-  let index = state.cart.findIndex((e) => e?.id === action?.payload);
+  console.log(`state`, state);
+
+  const index = state.cart?.findIndex((e) => e?.id === action?.payload?.id);
+  let updatedCart = [];
+  if (index <= -1) {
+    defaultPrice.push({
+      id: action?.payload?.id,
+      price: action?.payload?.price,
+    });
+  }
   switch (action?.type) {
     case ADD_ITEM:
+      let flag = true;
+      if (state.cart.length > 0 && index > -1) {
+        const addIdx = defaultPrice?.findIndex(
+          (e) => e?.id === action?.payload?.id
+        );
+        state.cart[index].currentCount++;
+        state.cart[index].price =
+          state.cart[index].price + defaultPrice[addIdx]?.price;
+        flag = false;
+      } else {
+        state.cart.push({ ...action.payload, currentCount: 1 });
+      }
       return {
         ...state,
-        [state.cart]: state.cart.push(action?.payload),
-        itemCount: state?.itemCount + 1,
+        itemCount: flag ? state?.itemCount + 1 : state.itemCount,
       };
+
     case REMOVE_ITEM:
-      let currentItemCount = state.cart[index]?.count;
+      state.cart.splice(index, 1); // ---> not re-rendering issue (not updating) so i have to add below line
+      updatedCart = [...state.cart];
       return {
         ...state,
-        [state.cart]: state.cart.slice(index, 1),
-        itemCount: state?.itemCount - currentItemCount,
+        cart: updatedCart,
+        itemCount: state?.itemCount - 1,
       };
+
     case INCREMENT:
+      state.cart[index].currentCount++; // ---> not re-rendering issue (not updating) so i have to add below line
+      const incIdx = defaultPrice?.findIndex(
+        (e) => e?.id === action?.payload?.id
+      );
+      state.cart[index].price =
+        state.cart[index].price + defaultPrice[incIdx]?.price;
+      updatedCart = [...state.cart];
       return {
         ...state,
-        [state.cart]: {
-          ...state.cart,
-          [state.cart[index]?.count]: state.cart[index]?.count + 1,
-        },
-        itemCount: state?.itemCount + 1,
+        cart: updatedCart,
       };
+
     case DECREMENT:
+      state.cart[index].currentCount--; // ---> not re-rendering issue (not updating) so i have to add below line
+      const decIdx = defaultPrice?.findIndex(
+        (e) => e?.id === action?.payload?.id
+      );
+      state.cart[index].price =
+        state.cart[index].price - defaultPrice[decIdx]?.price;
+      updatedCart = [...state.cart];
       return {
         ...state,
-        [state.cart]: {
-          ...state.cart,
-          [state.cart[index]?.count]: state.cart[index]?.count - 1,
-        },
-        itemCount: state.itemCount - 1,
+        cart: updatedCart,
       };
+
     case CLEAR_ALL:
       return initialState;
     default:

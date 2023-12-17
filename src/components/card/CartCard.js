@@ -5,7 +5,6 @@ import { FaPlus } from "react-icons/fa";
 import { TiMinus } from "react-icons/ti";
 import styled from "styled-components";
 import { Text } from "../Text";
-import img from "../../assets/hero.png";
 import { IoMdClose } from "react-icons/io";
 
 const StyledCard = styled.div`
@@ -19,6 +18,7 @@ const StyledCard = styled.div`
 const Image = styled.div`
   width: 20rem;
   height: 15rem;
+  padding: 1rem;
 `;
 
 const ItemCount = styled.div`
@@ -28,8 +28,19 @@ const ItemCount = styled.div`
 `;
 
 const CartCard = (props) => {
-  const { img, title, price, category } = props;
+  const {
+    img,
+    title,
+    price,
+    category,
+    currentItemCount,
+    id,
+    closeCartCard,
+    onIncDecItem,
+  } = props;
+
   const displayTitle = title?.length > 30 ? title.slice(0, 30) + "..." : title;
+
   return (
     <StyledCard>
       <Image>
@@ -44,17 +55,21 @@ const CartCard = (props) => {
           <ItemCount>
             <TiMinus
               style={{
+                pointerEvents: currentItemCount > 1 ? "auto" : "none",
                 cursor: "pointer",
               }}
+              onClick={() => onIncDecItem({ id, type: "dec" })}
             />
-            <span style={{ margin: "0 1.5rem" }}>{"1"}</span>
+            <span style={{ margin: "0 1.5rem" }}>{currentItemCount}</span>
             <FaPlus
               style={{
+                pointerEvents: currentItemCount > 7 ? "none" : "auto",
                 cursor: "pointer",
               }}
+              onClick={() => onIncDecItem({ id, type: "inc" })}
             />
           </ItemCount>
-          <Heading Text={price} fs="1.5rem" />
+          <Heading Text={price.toFixed(2)} fs="1.5rem" />
         </Flex>
       </Flex>
       <IoMdClose
@@ -64,6 +79,7 @@ const CartCard = (props) => {
           right: "2rem",
           cursor: "pointer",
         }}
+        onClick={() => closeCartCard(id)}
       />
     </StyledCard>
   );

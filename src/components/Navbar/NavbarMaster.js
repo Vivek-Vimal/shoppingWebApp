@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import Flex from "../Styling/Flex";
 import { FiShoppingCart } from "react-icons/fi";
+import { AiOutlineAliwangwang } from "react-icons/ai";
 import { RiAccountPinCircleFill } from "react-icons/ri";
-import { FcIcons8Cup } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Heading } from "../Heading";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -33,18 +34,32 @@ const CartNumberDisplay = styled.span`
   border-radius: 50%;
   font-weight: 700;
   font-size: 1.5rem;
+  background: ${(props) => (props?.path === "/cart" ? "green" : "#EBD96B")};
+  padding: 0 0.5rem;
+  color: ${(props) => (props?.path === "/cart" ? "#FFF" : "#000")};
 `;
 
 const Navbar = () => {
   const number = useSelector((count) => count?.itemCount);
   const itemDisplay = number > 0 ? number : null;
 
-  let path = window.location.pathname;
+  const path = window.location.pathname;
 
   return (
     <StyledNav>
       <NavItem to="/home">
-        <FcIcons8Cup size="3rem" style={{ margin: "0 0 0 5rem" }} />
+        <Flex width="20rem">
+          <AiOutlineAliwangwang
+            size="3rem"
+            style={{ margin: "0 0 0 5rem" }}
+            color={path === "/home" ? "green" : "#000"}
+          />
+          <Heading
+            Text="Let's Shop"
+            lh="0"
+            color={path === "/home" ? "green" : "#000"}
+          />
+        </Flex>
       </NavItem>
 
       <Flex width="55rem" jc="space-between">
@@ -71,15 +86,15 @@ const Navbar = () => {
           </NavItem>
         </Flex>
         <Flex width="8rem" jc="space-between" m="0 5rem 0 0">
-          <CartContainer>
-            <Link to="/cart">
+          <Link to="/cart">
+            <CartContainer>
               <FiShoppingCart
                 size="2.5rem"
                 color={path === "/cart" ? "green" : "#000"}
               />
-            </Link>
-            <CartNumberDisplay>{itemDisplay}</CartNumberDisplay>
-          </CartContainer>
+              <CartNumberDisplay path={path}>{itemDisplay}</CartNumberDisplay>
+            </CartContainer>
+          </Link>
           <RiAccountPinCircleFill size="2.5rem" />
         </Flex>
       </Flex>

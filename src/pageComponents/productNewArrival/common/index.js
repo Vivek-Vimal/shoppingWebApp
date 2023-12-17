@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { PageLayout } from "../../../components/PageLayout";
 import { PageWidth } from "../../../components/Width";
 import { Heading } from "../../../components/Heading";
@@ -28,6 +28,9 @@ const CommonProduct = () => {
     dispatch({ ...addItem, payload: item });
   };
 
+  const displayProductData =
+    path === "/product" ? productData : productData?.slice(0, 3);
+
   return (
     <PageLayout
       start={path === "/product" ? true : false}
@@ -42,7 +45,7 @@ const CommonProduct = () => {
         </Flex>
         {path === "/product" && <FilterAndSearchMaster />}
         <Flex wrap>
-          {productData?.map((item) => (
+          {displayProductData?.map((item) => (
             <Card
               modalFun={() => modalFun(item)}
               title={item?.title}

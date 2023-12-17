@@ -43,6 +43,7 @@ const PageWidth = ({
   boxShadow,
   direction,
   jc,
+  key,
 }) => {
   return (
     <StyledWidth
@@ -57,6 +58,7 @@ const PageWidth = ({
       boxShadow={boxShadow}
       direction={direction}
       jc={jc}
+      key={key}
     >
       {children}
     </StyledWidth>
