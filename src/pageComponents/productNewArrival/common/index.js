@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PageLayout } from "../../../components/PageLayout";
 import { PageWidth } from "../../../components/Width";
 import { Heading } from "../../../components/Heading";
@@ -16,8 +16,10 @@ const CommonProduct = () => {
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState("");
   const dispatch = useDispatch();
+  const [searchinput, setSearchInput] = useState("");
+  const [displayProductData, setDisplayProductData] = useState([]);
 
-  let path = window.location.pathname;
+  const path = window.location.pathname;
 
   const modalFun = (item) => {
     setIsModelOpen(true);
@@ -28,8 +30,35 @@ const CommonProduct = () => {
     dispatch({ ...addItem, payload: item });
   };
 
-  const displayProductData =
-    path === "/product" ? productData : productData?.slice(0, 3);
+  const onChange = (input) => {
+    setSearchInput(input.target.value);
+  };
+
+  const onSearch = () => {
+    const filterData = productData?.filter(
+      (item) => item?.title === searchinput
+    );
+    setDisplayProductData([...filterData]);
+  };
+
+  useEffect(() => {
+    if (path === "/product") {
+      setDisplayProductData([...productData]);
+    } else {
+      setDisplayProductData(productData?.slice(0, 3));
+    }
+  }, [path]);
+
+  useEffect(() => {
+    if (!searchinput) {
+      setDisplayProductData([...productData]);
+    }
+  }, [searchinput]);
+
+  const searchFilterProps = {
+    onSearch,
+    onChange,
+  };
 
   return (
     <PageLayout
@@ -43,7 +72,9 @@ const CommonProduct = () => {
             fs="3rem"
           />
         </Flex>
-        {path === "/product" && <FilterAndSearchMaster />}
+        {path === "/product" && (
+          <FilterAndSearchMaster {...searchFilterProps} />
+        )}
         <Flex wrap>
           {displayProductData?.map((item) => (
             <Card
@@ -53,6 +84,7 @@ const CommonProduct = () => {
               price={item?.price}
               img={item?.image}
               addToCart={() => addToCart(item)}
+              key={item?.id}
             />
           ))}
 

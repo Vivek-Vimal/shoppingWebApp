@@ -4,7 +4,7 @@ import { Text } from "../Text";
 import { Checkbox } from "../Checkbox";
 import { Search } from "../Search";
 
-const FilterAndSearchMaster = () => {
+const FilterAndSearchMaster = (props) => {
   return (
     <Flex bs="rgba(0, 0, 0, 0.09) 0px 3px 12px" p="2rem">
       <Flex>
@@ -21,7 +21,7 @@ const FilterAndSearchMaster = () => {
           <Checkbox />
         </Flex>
       </Flex>
-      <Search />
+      <Search {...props} />
     </Flex>
   );
 };
