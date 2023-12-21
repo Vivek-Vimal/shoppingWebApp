@@ -8,9 +8,9 @@ const StyledInput = styled.input`
   line-height: 21px;
   letter-spacing: 0.075em;
   padding: 0 0 0 1rem;
-  border: 2px solid #EBD96B;
+  border: 2px solid #ebd96b;
   border-radius: ${(props) => (props.br ? props.br : "0.5rem")};
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   margin: ${(props) => (props.m ? props.m : "")};
   height: ${(props) => (props.height ? props.height : "3rem")};
   width: ${(props) => (props.width ? props.width : "12rem")};
@@ -30,6 +30,7 @@ const Input = (props) => {
     <StyledInput
       {...props}
       placeholder={props.placeholder ? props.placeholder : "placeholder"}
+      value={props?.value ? props?.value : ""}
     />
   );
 };

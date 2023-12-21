@@ -18,6 +18,13 @@ const CommonProduct = () => {
   const dispatch = useDispatch();
   const [searchinput, setSearchInput] = useState("");
   const [displayProductData, setDisplayProductData] = useState([]);
+  const [isSearchClicked, setIsSearchClicked] = useState({
+    searchButton: false,
+    checkboxButton: false,
+  });
+  const [category, setCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
   const path = window.location.pathname;
 
@@ -31,14 +38,47 @@ const CommonProduct = () => {
   };
 
   const onChange = (input) => {
-    setSearchInput(input.target.value);
+    setSearchInput(input.target.value?.toLowerCase());
   };
 
   const onSearch = () => {
-    const filterData = productData?.filter(
-      (item) => item?.title === searchinput
+    if (searchinput) {
+      setIsSearchClicked((prev) => ({ ...prev, searchButton: true }));
+      const filterData = [];
+
+      displayProductData?.map(
+        (item) =>
+          item?.title?.toLowerCase()?.includes(searchinput) &&
+          filterData?.push(item)
+      );
+
+      setDisplayProductData([...filterData]);
+    }
+  };
+
+  const onCheckboxChange = (props) => {
+    setIsSearchClicked((prev) => ({ ...prev, checkboxButton: true }));
+
+    const index = selectedCategory?.findIndex(
+      (e) => e?.name === props?.target.name
     );
-    setDisplayProductData([...filterData]);
+
+    if (index > -1) {
+      setSelectedCategory((prev) => {
+        const updatedArr = [...prev];
+        updatedArr[index].isChecked = props?.target.checked;
+        return [...updatedArr];
+      });
+    } else {
+      setSelectedCategory((prev) => [
+        ...prev,
+        {
+          //value: props.target.value,
+          name: props.target.name,
+          isChecked: props.target.checked,
+        },
+      ]);
+    }
   };
 
   useEffect(() => {
@@ -51,13 +91,56 @@ const CommonProduct = () => {
 
   useEffect(() => {
     if (!searchinput) {
+      if (selectedCategory?.find((e) => e?.isChecked)) {
+        setDisplayProductData([...filteredData]);
+      } else {
+        if (isSearchClicked?.searchButton) {
+          setDisplayProductData([...productData]);
+        }
+      }
+    }
+  }, [searchinput, isSearchClicked]);
+
+  useEffect(() => {
+    if (productData?.length > 0) {
+      const uniqueCategory = [];
+
+      productData.map((e) =>
+        uniqueCategory?.find((i) => i === e?.category)
+          ? null
+          : uniqueCategory.push(e?.category)
+      );
+
+      setCategory([...uniqueCategory]);
+    }
+  }, [productData]);
+
+  useEffect(() => {
+    const index = selectedCategory?.findIndex((e) => e?.isChecked === true);
+    const updatedArr = [];
+    setSearchInput("");
+
+    if (index > -1) {
+      productData?.map((item) =>
+        selectedCategory?.find(
+          (e) => e?.isChecked && e?.name === item?.category
+        )
+          ? updatedArr?.push(item)
+          : null
+      );
+      setFilteredData([...updatedArr]);
+      setDisplayProductData([...updatedArr]);
+    } else if (isSearchClicked?.checkboxButton) {
       setDisplayProductData([...productData]);
     }
-  }, [searchinput]);
+  }, [selectedCategory]);
 
   const searchFilterProps = {
     onSearch,
     onChange,
+    category,
+    onCheckboxChange,
+    searchinput,
   };
 
   return (

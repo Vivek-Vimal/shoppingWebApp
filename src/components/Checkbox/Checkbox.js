@@ -5,11 +5,19 @@ const StyledCheckbox = styled.input`
   cursor: pointer;
   width: 1.5rem;
   height: 1.5rem;
-
 `;
 
-const Checkbox = () => {
-  return <StyledCheckbox type="checkbox" />;
+const Checkbox = (props) => {
+  const { id, name, value, onChange } = props;
+  return (
+    <StyledCheckbox
+      type="checkbox"
+      id={id}
+      name={name}
+      value={value}
+      onChange={onChange}
+    />
+  );
 };
 
 export default Checkbox;
