@@ -159,17 +159,27 @@ const CommonProduct = () => {
           <FilterAndSearchMaster {...searchFilterProps} />
         )}
         <Flex wrap>
-          {displayProductData?.map((item) => (
-            <Card
-              modalFun={() => modalFun(item)}
-              title={item?.title}
-              desc={item?.description}
-              price={item?.price}
-              img={item?.image}
-              addToCart={() => addToCart(item)}
-              key={item?.id}
-            />
-          ))}
+          {displayProductData?.length > 0 ? (
+            displayProductData?.map((item) => (
+              <Card
+                modalFun={() => modalFun(item)}
+                title={item?.title}
+                desc={item?.description}
+                price={item?.price}
+                img={item?.image}
+                addToCart={() => addToCart(item)}
+                key={item?.id}
+              />
+            ))
+          ) : (
+            <Flex jc="center">
+              <Heading
+                Text="No Match found, Try search again"
+                center
+                m="5rem 0 0 0"
+              />
+            </Flex>
+          )}
 
           <Modal
             open={isModelOpen}

@@ -20,20 +20,6 @@ const StyledButton = styled.button`
   height: ${(props) => (props.height ? props.height : "")};
   z-index: 6;
 
-  @media (max-width: 768px) {
-    max-width: ${(props) =>
-      props.navSmall
-        ? props.navSmall
-        : props.navWidth
-        ? props.navWidth
-        : "15rem"};
-    font-size: ${(props) =>
-      props.nav ? "9px" : props.fontSize ? props.fontSize : "12px"};
-  }
-
-  @media (max-width: 450px) {
-    margin: ${(props) => (props.sm ? props.sm : "")};
-  }
 `;
 
 const Button = (props) => {
@@ -41,16 +27,14 @@ const Button = (props) => {
 
   return (
     <StyledButton
-      onClick={() => {
-        onClick();
-      }}
+      onClick={onClick}
       {...props}
       type="submit"
       style={{
-        opacity: props.disabled ? 0.3 : 1,
+        opacity: props.dis ? 0.3 : 1,
       }}
     >
-      {props?.text ? props.text : "text"}
+      {props?.text ? props.text : "button"}
     </StyledButton>
   );
 };

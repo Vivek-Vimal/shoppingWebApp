@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledInput = styled.input`
-  color: ${(props) => (props.color ? props.color : "#000000")};
+const StyledDropdown = styled.select`
   font-size: 20px;
   font-weight: 400;
   line-height: 21px;
@@ -13,6 +12,7 @@ const StyledInput = styled.input`
   margin: ${(props) => (props.m ? props.m : "")};
   height: ${(props) => (props.height ? props.height : "3rem")};
   width: ${(props) => (props.width ? props.width : "12rem")};
+  padding: 0 0 0 1rem;
 
   &::placeholder {
     color: #666666;
@@ -22,23 +22,11 @@ const StyledInput = styled.input`
 
   &:focus {
     outline: none;
-    padding: 0 0 0 1rem;
-    &::placeholder {
-      color: #666666;
-      font-size: 16px;
-      padding: 0;
-    }
   }
 `;
 
-const Input = (props) => {
-  return (
-    <StyledInput
-      {...props}
-      placeholder={props.placeholder ? props.placeholder : "placeholder"}
-      value={props?.value ? props?.value : ""}
-    />
-  );
+const Dropdown = (props) => {
+  return <StyledDropdown {...props} />;
 };
 
-export default Input;
+export default Dropdown;

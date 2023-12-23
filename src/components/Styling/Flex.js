@@ -13,6 +13,21 @@ const StyledFlex = styled.div`
   height: ${(props) => (props?.height ? props?.height : "")};
   position: ${(props) => (props?.position ? props?.position : "")};
   box-shadow: ${(props) => (props?.bs ? props?.bs : "")};
+  overflow-y: ${(props) => (props?.overflowY ? "auto" : "visible")};
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 20px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ebd96b;
+    border-radius: 20px;
+  }
 
   @media (max-width: 1100px) {
     flex-direction: ${(props) =>
@@ -50,6 +65,7 @@ const Flex = ({
   height,
   position,
   bs,
+  overflowY,
 }) => {
   return (
     <StyledFlex
@@ -67,6 +83,7 @@ const Flex = ({
       height={height}
       position={position}
       bs={bs}
+      overflowY={overflowY}
     >
       {children}
     </StyledFlex>

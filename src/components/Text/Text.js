@@ -10,8 +10,7 @@ const StyledText = styled.p`
   font-weight: ${(props) => (props.fw ? props.fw : "400")};
   font-family: "Inter", sans-serif;
   margin: ${(props) => (props.m ? props.m : "")};
-  text-transform: ${(props) =>
-    props?.transform ? props?.transform : "lowercase"};
+  text-transform: ${(props) => (props?.transform ? props?.transform : "")};
 
   &:hover {
     color: ${(props) => (props.hoverColor ? props.hoverColor : null)};
