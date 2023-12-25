@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { PageLayout } from "../../components/PageLayout";
 import { PageWidth } from "../../components/Width";
 import { ButtonGroup } from "../../components/ButtonGroup";
-import AddProduct from "./components/addProduct";
+import { CommonAdd } from "./common";
 import { Heading } from "../../components/Heading";
 
 const DashboardMaster = () => {
@@ -23,7 +23,7 @@ const DashboardMaster = () => {
       <PageWidth width="1600px">
         <Heading Text="Welcome User Admin" width="100%" />
         <ButtonGroup {...buttonGroupProps} m="1rem 0 2rem 0" />
-        {toggleButton === "PR" && <AddProduct toggleButton={toggleButton} />}
+        <CommonAdd toggleButton={toggleButton} />
       </PageWidth>
     </PageLayout>
   );

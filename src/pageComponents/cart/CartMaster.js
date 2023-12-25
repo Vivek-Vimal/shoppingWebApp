@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { removeItem, incItem, decItem } from "../../store/action";
 
 const CartMaster = () => {
-  const cartItem = useSelector((item) => item?.cart);
+  const cartItem = useSelector((item) => item?.cartReducer?.cart);
   const cartLength = cartItem?.length > 0 ? true : false;
 
   const dispatch = useDispatch();

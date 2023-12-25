@@ -1,4 +1,4 @@
 import { createStore } from "redux";
-import { cartReducer } from "./reducer";
+import { rootReducer } from "./reducer";
 
-export const globalStore = createStore(cartReducer);
+export const globalStore = createStore(rootReducer);

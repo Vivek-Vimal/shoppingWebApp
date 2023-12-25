@@ -5,11 +5,11 @@ import { Checkbox } from "../Checkbox";
 import { Search } from "../Search";
 
 const FilterAndSearchMaster = (props) => {
-  const { category, onCheckboxChange } = props;
+  const { categoryData, onCheckboxChange } = props;
   return (
     <Flex bs="rgba(0, 0, 0, 0.09) 0px 3px 12px" p="2rem">
       <Flex>
-        {category?.map((item, index) => (
+        {categoryData?.map((item, index) => (
           <Flex>
             <Text transform="capitalize" Text={item} />
 

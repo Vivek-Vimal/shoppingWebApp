@@ -4,6 +4,7 @@ import {
   INCREMENT,
   DECREMENT,
   CLEAR_ALL,
+  CATEGORY,
 } from "./ActionType";
 
 export const addItem = {
@@ -23,4 +24,8 @@ export const decItem = {
 
 export const clearAll = {
   type: CLEAR_ALL,
+};
+
+export const category = {
+  type: CATEGORY,
 };

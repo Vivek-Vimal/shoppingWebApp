@@ -14,7 +14,7 @@ const StyledHeading = styled.h1`
   margin: ${(props) => (props.m ? props.m : "")};
   text-align: ${(props) => (props.center ? "center" : "left")} !important;
   letter-spacing: ${(props) => (props.ls ? props.ls : "")};
-  text-decoration: none;
+  text-decoration: ${(props) => (props.decoration ? props.decoration : "none")};
   text-transform: ${(props) => (props.capital ? "upper-case" : "lower-case")};
   width: ${(props) => (props.width ? props.width : "initial")};
   font-style: ${(props) => (props?.italic ? "italic" : "normal")};

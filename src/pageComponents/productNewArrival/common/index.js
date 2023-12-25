@@ -6,8 +6,8 @@ import { Card } from "../../../components/card";
 import Flex from "../../../components/Styling/Flex";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { useDispatch } from "react-redux";
-import { addItem } from "../../../store/action";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, category } from "../../../store/action";
 import { DetailCard } from "../../../components/card";
 import { FilterAndSearchMaster } from "../../../components/FilterAndSearch";
 import { productData } from "../DummyData";
@@ -22,11 +22,13 @@ const CommonProduct = () => {
     searchButton: false,
     checkboxButton: false,
   });
-  const [category, setCategory] = useState([]);
+
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
   const path = window.location.pathname;
+
+  const categoryData = useSelector((state) => state?.categoryReducer);
 
   const modalFun = (item) => {
     setIsModelOpen(true);
@@ -82,6 +84,10 @@ const CommonProduct = () => {
   };
 
   useEffect(() => {
+    dispatch(category);
+  }, []);
+
+  useEffect(() => {
     if (path === "/product") {
       setDisplayProductData([...productData]);
     } else {
@@ -100,20 +106,6 @@ const CommonProduct = () => {
       }
     }
   }, [searchinput, isSearchClicked]);
-
-  useEffect(() => {
-    if (productData?.length > 0) {
-      const uniqueCategory = [];
-
-      productData.map((e) =>
-        uniqueCategory?.find((i) => i === e?.category)
-          ? null
-          : uniqueCategory.push(e?.category)
-      );
-
-      setCategory([...uniqueCategory]);
-    }
-  }, [productData]);
 
   useEffect(() => {
     const index = selectedCategory?.findIndex((e) => e?.isChecked === true);
@@ -138,9 +130,9 @@ const CommonProduct = () => {
   const searchFilterProps = {
     onSearch,
     onChange,
-    category,
     onCheckboxChange,
     searchinput,
+    categoryData,
   };
 
   return (

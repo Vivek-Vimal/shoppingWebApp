@@ -12,11 +12,10 @@ const StyledDropdown = styled.select`
   margin: ${(props) => (props.m ? props.m : "")};
   height: ${(props) => (props.height ? props.height : "3rem")};
   width: ${(props) => (props.width ? props.width : "12rem")};
-  padding: 0 0 0 1rem;
+  padding: 0 1rem;
 
   &::placeholder {
     color: #666666;
-    padding: 0 0 0 1rem;
     font-size: 16px;
   }
 

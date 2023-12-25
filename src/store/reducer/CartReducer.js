@@ -14,8 +14,8 @@ const initialState = {
 let defaultPrice = [];
 
 export const cartReducer = (state = initialState, action) => {
-  console.log(`action`, action);
-  console.log(`state`, state);
+  // console.log(`action`, action);
+  // console.log(`state`, state);
 
   const index = state.cart?.findIndex((e) => e?.id === action?.payload?.id);
   let updatedCart = [];

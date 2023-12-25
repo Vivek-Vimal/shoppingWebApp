@@ -40,7 +40,7 @@ const CartNumberDisplay = styled.span`
 `;
 
 const Navbar = () => {
-  const number = useSelector((count) => count?.itemCount);
+  const number = useSelector((count) => count?.cartReducer?.itemCount);
   const itemDisplay = number > 0 ? number : null;
 
   const path = window.location.pathname;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../Button";
 import Flex from "../Styling/Flex";
+import { type } from "../../constants";
 
 const ButtonGroupMaster = (props) => {
   const { toggleButton, onClick } = props;
@@ -8,22 +9,28 @@ const ButtonGroupMaster = (props) => {
   return (
     <Flex {...props}>
       <Button
-        dis={toggleButton !== "PR"}
+        dis={toggleButton !== type?.product?.key}
         br="0"
-        text="Product"
-        onClick={() => onClick("PR")}
+        text={type?.product?.title}
+        onClick={() => onClick(type?.product?.key)}
       />
       <Button
-        dis={toggleButton !== "BR"}
+        dis={toggleButton !== type?.brand?.key}
         br="0"
-        text="Brand"
-        onClick={() => onClick("BR")}
+        text={type?.brand?.title}
+        onClick={() => onClick(type?.brand?.key)}
       />
       <Button
-        dis={toggleButton !== "SL"}
+        dis={toggleButton !== type?.category?.key}
         br="0"
-        text="Slide"
-        onClick={() => onClick("SL")}
+        text={type?.category?.title}
+        onClick={() => onClick(type?.category?.key)}
+      />
+      <Button
+        dis={toggleButton !== type?.slide?.key}
+        br="0"
+        text={type?.slide?.title}
+        onClick={() => onClick(type?.slide?.key)}
       />
     </Flex>
   );
