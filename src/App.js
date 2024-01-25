@@ -6,10 +6,12 @@ import HomeMasterPage from "./pages/homeMasterPage";
 import NoPageFoundMasterPage from "./pages/noPageFound";
 import ProductMasterPage from "./pages/productPage";
 import DashboardPage from "./pages/dashboardPage";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <>
+      <Toaster />
       <Routes>
         <Route path="/" element={<SignUpInMaster />} />
         <Route path="/home" element={<HomeMasterPage />} exact />

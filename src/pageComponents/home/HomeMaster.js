@@ -1,24 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "../../components/Navbar";
 import { PageLayout } from "../../components/PageLayout";
 import { PageWidth } from "../../components/Width";
-import heroImg from "../../assets/hero.png";
 import styled from "styled-components";
 import { Heading } from "../../components/Heading";
 import { Text } from "../../components/Text";
 import { Button } from "../../components/Button";
-import Carousel from "nuka-carousel";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { axiosGet } from "../../api/components/GET";
+import Spinner from "../../components/Spinner";
+import ImageGallery from "react-image-gallery";
 
 const LeftHeroSec = styled.div``;
 
 const RightHeroSec = styled.div`
   height: 35rem;
   width: 40rem;
-  position: relative;
+  display: ${(props) => (props?.isLoading ? "grid" : "block")};
+  place-items: center;
 `;
 
 const HomeMaster = () => {
+  const navigate = useNavigate();
+  const images = [];
+
+  const onClick = () => {
+    navigate("/product");
+  };
+
+  const [slideImgData, setSlideImgData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  slideImgData?.map((img) => {
+    images.push({
+      original: img?.url,
+      thumbnail: img?.url,
+      originalHeight: "550",
+      originalWidth: "600",
+    });
+  });
+
+  useEffect(() => {
+    setIsLoading(true);
+    axiosGet({ endPoint: "slideImg" })?.then((res) => {
+      setSlideImgData(res?.data);
+      setIsLoading(false);
+    });
+  }, []);
+
   return (
     <PageLayout>
       <Navbar />
@@ -36,28 +65,23 @@ const HomeMaster = () => {
           <Heading Text="PRODUCTS" fs="4rem" lh="0.75rem" />
 
           <Text Text="Live for Influential and Innovative fashion!" />
-          <Link to="/product">
-            <Button text="Shop Now" m="1rem 0 0 0" />
-          </Link>
+
+          <Button text="Shop Now" m="1rem 0 0 0" onClick={onClick} />
         </LeftHeroSec>
-        <RightHeroSec>
-          <Carousel cellAlign="center" style={{ borderRadius: "1rem" }}>
-            <img
-              src={heroImg}
-              alt=""
-              style={{ width: "100%", height: "100%" }}
+        <RightHeroSec isLoading={isLoading}>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <ImageGallery
+              items={images}
+              showThumbnails={false}
+              showFullscreenButton={false}
+              showPlayButton={false}
+              autoPlay
+              slideInterval={2500}
+              showBullets
             />
-            <img
-              src={heroImg}
-              alt=""
-              style={{ width: "100%", height: "100%" }}
-            />
-            <img
-              src={heroImg}
-              alt=""
-              style={{ width: "100%", height: "100%" }}
-            />
-          </Carousel>
+          )}
         </RightHeroSec>
       </PageWidth>
     </PageLayout>

@@ -7,9 +7,14 @@ import img from "../../assets/Background.png";
 const SignUpInMaster = () => {
   const [isUpIn, setIsUpIn] = useState("signUp");
 
+  const onSignUpIn = () => {
+    
+  };
+
   const signUpInProps = {
     isUpIn,
     setIsUpIn,
+    onClick: onSignUpIn,
   };
 
   return (

@@ -6,17 +6,20 @@ import { Card } from "../../../components/card";
 import Flex from "../../../components/Styling/Flex";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { useDispatch, useSelector } from "react-redux";
 import { addItem, category } from "../../../store/action";
 import { DetailCard } from "../../../components/card";
 import { FilterAndSearchMaster } from "../../../components/FilterAndSearch";
-import { productData } from "../DummyData";
+import { axiosGet } from "../../../api/components/GET";
+import { useDispatch } from "react-redux";
+import Spinner from "../../../components/Spinner";
 
 const CommonProduct = () => {
+  const dispatch = useDispatch();
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState("");
-  const dispatch = useDispatch();
   const [searchinput, setSearchInput] = useState("");
+  const [productData, setProductData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [displayProductData, setDisplayProductData] = useState([]);
   const [isSearchClicked, setIsSearchClicked] = useState({
     searchButton: false,
@@ -27,8 +30,6 @@ const CommonProduct = () => {
   const [filteredData, setFilteredData] = useState([]);
 
   const path = window.location.pathname;
-
-  const categoryData = useSelector((state) => state?.categoryReducer);
 
   const modalFun = (item) => {
     setIsModelOpen(true);
@@ -59,6 +60,7 @@ const CommonProduct = () => {
   };
 
   const onCheckboxChange = (props) => {
+    
     setIsSearchClicked((prev) => ({ ...prev, checkboxButton: true }));
 
     const index = selectedCategory?.findIndex(
@@ -84,16 +86,22 @@ const CommonProduct = () => {
   };
 
   useEffect(() => {
-    dispatch(category);
+    setIsLoading(true);
+    axiosGet({ endPoint: "product" })?.then((res) => {
+      setIsLoading(false);
+      setProductData(res?.data);
+    });
   }, []);
 
   useEffect(() => {
-    if (path === "/product") {
-      setDisplayProductData([...productData]);
-    } else {
-      setDisplayProductData(productData?.slice(0, 3));
+    if (productData?.length > 0) {
+      if (path === "/product") {
+        setDisplayProductData([...productData]);
+      } else {
+        setDisplayProductData(productData?.slice(0, 3));
+      }
     }
-  }, [path]);
+  }, [path, productData]);
 
   useEffect(() => {
     if (!searchinput) {
@@ -132,7 +140,6 @@ const CommonProduct = () => {
     onChange,
     onCheckboxChange,
     searchinput,
-    categoryData,
   };
 
   return (
@@ -150,26 +157,24 @@ const CommonProduct = () => {
         {path === "/product" && (
           <FilterAndSearchMaster {...searchFilterProps} />
         )}
-        <Flex wrap>
-          {displayProductData?.length > 0 ? (
+        <Flex wrap jc={isLoading ? "center" : ""}>
+          {isLoading ? (
+            <Spinner m="5rem 0 0 0" />
+          ) : displayProductData?.length > 0 ? (
             displayProductData?.map((item) => (
               <Card
                 modalFun={() => modalFun(item)}
                 title={item?.title}
                 desc={item?.description}
                 price={item?.price}
-                img={item?.image}
+                img={item?.url}
                 addToCart={() => addToCart(item)}
-                key={item?.id}
+                key={item?._id}
               />
             ))
           ) : (
             <Flex jc="center">
-              <Heading
-                Text="No Match found, Try search again"
-                center
-                m="5rem 0 0 0"
-              />
+              <Heading Text="No Match found" center m="5rem 0 0 0" />
             </Flex>
           )}
 

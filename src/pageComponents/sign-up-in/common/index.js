@@ -6,8 +6,10 @@ import { Heading } from "../../../components/Heading";
 import { Text } from "../../../components/Text";
 import { TiStar } from "react-icons/ti";
 import Flex from "../../../components/Styling/Flex";
-import toast, { Toaster } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { axiosPost } from "../../../api";
+import { useNavigate } from "react-router-dom";
+import { Checkbox } from "../../../components/Checkbox";
 
 const StyledSignUp = styled.form`
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -25,20 +27,23 @@ const SignIN = styled.div`
 `;
 
 const SignUpIn = (props) => {
-  const { isUpIn, setIsUpIn } = props;
+  const { isUpIn, setIsUpIn, onClick } = props;
+
+  const navigate = useNavigate();
 
   const formObj = {
-    eMail: "",
-    phone: "",
-    address: "",
+    userName: "",
+    email: "",
     password: "",
   };
 
   const [formData, setFormData] = useState(formObj);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     if (isUpIn === "signIn") {
-      const { phone, address, ...newObj } = formObj;
+      const { userName, ...newObj } = formObj;
       setFormData(newObj);
     } else if (isUpIn === "signUp") {
       setFormData(formObj);
@@ -53,24 +58,43 @@ const SignUpIn = (props) => {
     }));
   };
 
+  const onCheckboxChange = () => {
+    setIsChecked(() => !isChecked);
+  };
+
+  const signInUpProps = {
+    endPoint: isUpIn === "signIn" ? "auth/signIn" : "auth/signUp",
+    payload: formData,
+  };
+
   const handleSubmit = (sub) => {
     sub.preventDefault();
-    if (
-      formData?.eMail === "" ||
-      formData?.phone === "" ||
-      formData?.password === ""
-    ) {
+    const userName = isUpIn === "signUp" ? formData?.userName : true;
+    if (!userName || !formData?.email || !formData?.password) {
       toast.error("Please fill all the required fields");
+    } else {
+      setIsLoading(true);
+      axiosPost({ ...signInUpProps }).then((res) => {
+        setIsLoading(false);
+        if (res?.status === 200) {
+          toast.success(res?.data?.message);
+          if (isUpIn === "signUp") {
+            setIsUpIn("signIn");
+          } else {
+            navigate("/home");
+          }
+        } else {
+          toast.error(res?.response?.data?.message);
+        }
+      });
     }
-    console.log(`formData`, formData);
   };
 
   const margin = "0 0 1rem 0";
   const placeholderText = "please enter ";
+
   return (
     <StyledSignUp onSubmit={handleSubmit}>
-      <Toaster />
-
       <SignIN
         onClick={() =>
           isUpIn === "signUp" ? setIsUpIn("signIn") : setIsUpIn("signUp")
@@ -87,42 +111,18 @@ const SignUpIn = (props) => {
         center
         lh="0"
       />
-      <div style={{ margin: margin }}>
-        <Flex>
-          <Text Text="E-Mail" />
-          <TiStar />
-        </Flex>
-        <Input
-          name="eMail"
-          value={formData?.eMail}
-          placeholder={placeholderText + "e-mail"}
-          width="23rem"
-          onChange={onChange}
-        />
-      </div>
 
       {isUpIn === "signUp" && (
         <>
           <div style={{ margin: margin }}>
             <Flex>
-              <Text Text="Phone Number" />
+              <Text Text="User Name" />
               <TiStar />
             </Flex>
             <Input
-              name="phone"
-              value={formData?.phone}
-              placeholder={placeholderText + "phone no."}
-              width="23rem"
-              onChange={onChange}
-            />
-          </div>
-
-          <div style={{ margin: margin }}>
-            <Text Text="Address" />
-            <Input
-              name="address"
-              value={formData?.address}
-              placeholder={placeholderText + "address"}
+              name="userName"
+              value={formData?.userName}
+              placeholder={placeholderText + "user name"}
               width="23rem"
               onChange={onChange}
             />
@@ -132,8 +132,36 @@ const SignUpIn = (props) => {
 
       <div style={{ margin: margin }}>
         <Flex>
-          <Text Text="Password" />
+          <Text Text="E-Mail" />
           <TiStar />
+        </Flex>
+        <Input
+          name="email"
+          value={formData?.email}
+          placeholder={placeholderText + "e-mail"}
+          width="23rem"
+          onChange={onChange}
+        />
+      </div>
+
+      <div style={{ margin: margin }}>
+        <Flex jc="space-between">
+          <Flex>
+            <Text Text="Password" />
+
+            <TiStar />
+          </Flex>
+          <Flex width="5rem">
+            <Text transform="capitalize" Text={"Show"} />
+            <Checkbox
+              id={1}
+              name={"showHidePass"}
+              value={isChecked}
+              onChange={onCheckboxChange}
+              width="1rem"
+              height="1rem"
+            />
+          </Flex>
         </Flex>
         <Input
           name="password"
@@ -141,15 +169,17 @@ const SignUpIn = (props) => {
           placeholder={placeholderText + "password"}
           width="23rem"
           onChange={onChange}
+          type={isChecked ? "text" : "password"}
         />
       </div>
-      <Link to="/home" style={{ width: "100%" }}>
-        <Button
-          text={isUpIn === "signIn" ? "Sign In" : "Sign Up"}
-          m="1rem 0 0 0"
-          width="100%"
-        />
-      </Link>
+
+      <Button
+        text={isUpIn === "signIn" ? "Sign In" : "Sign Up"}
+        m="1rem 0 0 0"
+        width="100%"
+        onClick={onClick}
+        isLoading={isLoading}
+      />
     </StyledSignUp>
   );
 };

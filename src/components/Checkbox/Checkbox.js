@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const StyledCheckbox = styled.input`
   cursor: pointer;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: ${(props) => (props?.width ? props?.width : "1.5rem")};
+  height: ${(props) => (props?.height ? props?.height : "1.5rem")};
 `;
 
 const Checkbox = (props) => {
@@ -16,6 +16,7 @@ const Checkbox = (props) => {
       name={name}
       value={value}
       onChange={onChange}
+      {...props}
     />
   );
 };

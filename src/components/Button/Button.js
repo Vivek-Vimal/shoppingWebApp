@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Spinner from "../Spinner";
 
 const StyledButton = styled.button`
   color: ${(props) => (props.color ? props.color : "#242323")};
@@ -12,18 +13,20 @@ const StyledButton = styled.button`
     props.nav ? "2px" : props.padding ? props.padding : "0.85rem 2rem"};
   border-radius: ${(props) => (props.br ? props.br : "4px")};
   border: ${(props) => (props.lightBorder ? "1.2px solid #FFFFFF" : "none")};
-  cursor: pointer;
+  cursor: "pointer" !important;
+  pointer-events: ${(props) => (props?.isLoading ? "none" : "all")};
   min-width: ${(props) => (props.width ? props.width : "15rem")};
   background: ${(props) => (props.bg ? props.bg : "#EBD96B")};
   margin: ${(props) => (props.m ? props.m : "")};
-  font-family: "Montserrat", sans-serif;
   height: ${(props) => (props.height ? props.height : "")};
   z-index: 6;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Button = (props) => {
-  const { onClick = () => {} } = props;
+  const { onClick = () => {}, isLoading } = props;
 
   return (
     <StyledButton
@@ -31,10 +34,10 @@ const Button = (props) => {
       {...props}
       type="submit"
       style={{
-        opacity: props.dis ? 0.3 : 1,
+        opacity: isLoading || props?.dis ? 0.3 : 1,
       }}
     >
-      {props?.text ? props.text : "button"}
+      {isLoading && <Spinner />} {props?.text ? props.text : "button"}
     </StyledButton>
   );
 };

@@ -34,7 +34,7 @@ const CartCard = (props) => {
     price,
     category,
     currentItemCount,
-    id,
+    _id,
     closeCartCard,
     onIncDecItem,
   } = props;
@@ -58,7 +58,7 @@ const CartCard = (props) => {
                 pointerEvents: currentItemCount > 1 ? "auto" : "none",
                 cursor: "pointer",
               }}
-              onClick={() => onIncDecItem({ id, type: "dec" })}
+              onClick={() => onIncDecItem({ _id, type: "dec" })}
             />
             <span style={{ margin: "0 1.5rem" }}>{currentItemCount}</span>
             <FaPlus
@@ -66,7 +66,7 @@ const CartCard = (props) => {
                 pointerEvents: currentItemCount > 7 ? "none" : "auto",
                 cursor: "pointer",
               }}
-              onClick={() => onIncDecItem({ id, type: "inc" })}
+              onClick={() => onIncDecItem({ _id, type: "inc" })}
             />
           </ItemCount>
           <Heading Text={price.toFixed(2)} fs="1.5rem" />
@@ -79,7 +79,7 @@ const CartCard = (props) => {
           right: "2rem",
           cursor: "pointer",
         }}
-        onClick={() => closeCartCard(id)}
+        onClick={() => closeCartCard(_id)}
       />
     </StyledCard>
   );

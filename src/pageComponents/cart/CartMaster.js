@@ -6,7 +6,7 @@ import Flex from "../../components/Styling/Flex";
 import { useSelector, useDispatch } from "react-redux";
 import { Heading } from "../../components/Heading";
 import { Button } from "../../components/Button";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { removeItem, incItem, decItem } from "../../store/action";
 
 const CartMaster = () => {
@@ -14,9 +14,10 @@ const CartMaster = () => {
   const cartLength = cartItem?.length > 0 ? true : false;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const closeCartCard = (id) => {
-    dispatch({ ...removeItem, payload: { id } });
+  const closeCartCard = (_id) => {
+    dispatch({ ...removeItem, payload: { _id } });
   };
 
   const onIncDecItem = (props) => {
@@ -27,8 +28,12 @@ const CartMaster = () => {
           : props?.type === "dec"
           ? decItem?.type
           : null,
-      payload: { id: props?.id },
+      payload: { _id: props?._id },
     });
+  };
+
+  const onClick = () => {
+    navigate("/product");
   };
 
   const cardProp = {
@@ -64,12 +69,12 @@ const CartMaster = () => {
             <Flex column noCenter>
               {cartItem?.map((item) => (
                 <CartCard
-                  img={item?.image}
+                  img={item?.url}
                   price={item?.price}
                   title={item?.title}
                   category={item?.category}
                   currentItemCount={item?.currentCount}
-                  id={item?.id}
+                  _id={item?._id}
                   {...cardProp}
                 />
               ))}
@@ -79,9 +84,7 @@ const CartMaster = () => {
         ) : (
           <>
             <Heading Text="No Product in the cart" center />
-            <Link to="/product">
-              <Button text="Continue Shopping" />
-            </Link>
+            <Button text="Continue Shopping" onClick={onClick} />
           </>
         )}
       </PageWidth>

@@ -17,11 +17,11 @@ export const cartReducer = (state = initialState, action) => {
   // console.log(`action`, action);
   // console.log(`state`, state);
 
-  const index = state.cart?.findIndex((e) => e?.id === action?.payload?.id);
+  const index = state.cart?.findIndex((e) => e?._id === action?.payload?._id);
   let updatedCart = [];
   if (index <= -1) {
     defaultPrice.push({
-      id: action?.payload?.id,
+      _id: action?.payload?._id,
       price: action?.payload?.price,
     });
   }
@@ -30,7 +30,7 @@ export const cartReducer = (state = initialState, action) => {
       let flag = true;
       if (state.cart.length > 0 && index > -1) {
         const addIdx = defaultPrice?.findIndex(
-          (e) => e?.id === action?.payload?.id
+          (e) => e?._id === action?.payload?._id
         );
         state.cart[index].currentCount++;
         state.cart[index].price =
@@ -56,7 +56,7 @@ export const cartReducer = (state = initialState, action) => {
     case INCREMENT:
       state.cart[index].currentCount++; // ---> not re-rendering issue (not updating) so i have to add below line
       const incIdx = defaultPrice?.findIndex(
-        (e) => e?.id === action?.payload?.id
+        (e) => e?._id === action?.payload?._id
       );
       state.cart[index].price =
         state.cart[index].price + defaultPrice[incIdx]?.price;
@@ -69,7 +69,7 @@ export const cartReducer = (state = initialState, action) => {
     case DECREMENT:
       state.cart[index].currentCount--; // ---> not re-rendering issue (not updating) so i have to add below line
       const decIdx = defaultPrice?.findIndex(
-        (e) => e?.id === action?.payload?.id
+        (e) => e?._id === action?.payload?._id
       );
       state.cart[index].price =
         state.cart[index].price - defaultPrice[decIdx]?.price;

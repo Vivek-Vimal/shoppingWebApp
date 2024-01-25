@@ -20,3 +20,5 @@ export const type = {
     key: "SL",
   },
 };
+
+export const BASE_URL = "https://web-app-backend-hjik.onrender.com/";

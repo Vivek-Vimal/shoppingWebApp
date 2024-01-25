@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-const Spinner = () => (
-  <StyledSpinner viewBox="0 0 50 50">
+const Spinner = (props) => (
+  <StyledSpinner viewBox="0 0 50 50" {...props}>
     <circle
       className="path"
       cx="25"
@@ -16,17 +16,17 @@ const Spinner = () => (
 
 const StyledSpinner = styled.svg`
   animation: rotate 2s linear infinite;
-  margin: -10px 0 0 -10px;
-  
-  width: 50px;
-  height: 50px;
-  
+  margin: ${(props) => (props?.m ? props?.m : "0 6px")};
+
+  width: 25px;
+  height: 25px;
+
   & .path {
-    stroke: #5652BF;
+    stroke: #242323;
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }
-  
+
   @keyframes rotate {
     100% {
       transform: rotate(360deg);

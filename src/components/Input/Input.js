@@ -31,6 +31,7 @@ const Input = (props) => {
       {...props}
       placeholder={props.placeholder ? props.placeholder : "placeholder"}
       value={props?.value ? props?.value : ""}
+      type={props?.type ? props?.type : "text"}
     />
   );
 };

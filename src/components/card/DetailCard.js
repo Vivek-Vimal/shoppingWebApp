@@ -23,7 +23,7 @@ const DetailCard = (props) => {
       <Flex noCenter>
         <Image>
           <img
-            src={currentItem?.image}
+            src={currentItem?.url}
             alt=""
             style={{ width: "100%", height: "100%" }}
           />

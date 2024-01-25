@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Input } from "../../../../components/Input";
 import { Button } from "../../../../components/Button";
@@ -7,8 +7,10 @@ import { Dropdown } from "../../../../components/Dropdown";
 import { Heading } from "../../../../components/Heading";
 import { type } from "../../../../constants";
 import { Line } from "../../../../components/Line";
+import { axiosPost } from "../../../../api/index";
+import toast from "react-hot-toast";
 
-const StyledCard = styled.div`
+const StyledCard = styled.form`
   width: 30rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
@@ -23,33 +25,72 @@ const Container = styled.div`
 `;
 
 const AddCommonCard = (props) => {
-  const { toggleButton, categoryData } = props;
+  const {
+    toggleButton,
+    title,
+    endPoint,
+    timeToFetchGet,
+    setTimeToFetchGet,
+    formData,
+    setFormData,
+    categoryData,
+  } = props;
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const pleaseEnter = "Please Enter ";
-  let title = "";
-  switch (toggleButton) {
-    case type?.product?.key:
-      title = "Add Product";
-      break;
-    case type?.brand?.key:
-      title = "Add Brand Image";
-      break;
-    case type?.category?.key:
-      title = "Add Category";
-      break;
-    case type?.slide?.key:
-      title = "Add Slide Image";
-      break;
-    default:
-      title = "Add";
-  }
+
+  const onFieldChange = (data) => {
+    setFormData((prev) => ({ ...prev, [data.target.name]: data.target.value }));
+  };
+
+  const handleSubmit = (data) => {
+    data.preventDefault();
+    const formProps = {
+      endPoint: endPoint,
+      payload: formData,
+    };
+
+    let flag = false;
+    if (
+      Object.values(formData)?.map((item) => {
+        if (!item) {
+          flag = true;
+        }
+      })
+    )
+      if (flag) {
+        toast.error("Please fill all the required field/s");
+      } else {
+        setIsLoading(true);
+        axiosPost({ ...formProps })?.then((res) => {
+          if (res?.status === 201) {
+            setFormData([]);
+            setIsLoading(false);
+            setTimeToFetchGet(() => !timeToFetchGet);
+            toast.success(res?.data?.message);
+          } else {
+            toast.error(res?.data?.message);
+            setIsLoading(false);
+          }
+        });
+      }
+  };
+
   return (
-    <StyledCard>
+    <StyledCard onSubmit={handleSubmit}>
       <Heading Text={title} lh="0" />
       <Line m="0 0 1.5rem 0" width="100%" />
       {toggleButton !== type?.category?.key && (
         <Container>
           <Text Text="Image Url" m="0.5rem 0" ls="0.05rem" />
-          <Input width="96%" placeholder={pleaseEnter + "Image Url"} />
+          <Input
+            width="96%"
+            placeholder={pleaseEnter + "Image Url"}
+            onChange={onFieldChange}
+            name="url"
+            value={formData?.url}
+          />
         </Container>
       )}
 
@@ -57,7 +98,13 @@ const AddCommonCard = (props) => {
         toggleButton === type?.category?.key) && (
         <Container>
           <Text Text="Title" m="0.5rem 0" ls="0.05rem" />
-          <Input width="96%" placeholder={pleaseEnter + "Title"} />
+          <Input
+            width="96%"
+            placeholder={pleaseEnter + "Title"}
+            onChange={onFieldChange}
+            name="title"
+            value={formData?.title}
+          />
         </Container>
       )}
 
@@ -65,26 +112,45 @@ const AddCommonCard = (props) => {
         <>
           <Container>
             <Text Text="Description" m="0.5rem 0" ls="0.05rem" />
-            <Input width="96%" placeholder={pleaseEnter + "Description"} />
+            <Input
+              width="96%"
+              placeholder={pleaseEnter + "Description"}
+              onChange={onFieldChange}
+              name="description"
+              value={formData?.description}
+            />
           </Container>
 
           <Container>
             <Text Text="Price" m="0.5rem 0" ls="0.05rem" />
-            <Input width="96%" placeholder={pleaseEnter + "Price"} />
+            <Input
+              width="96%"
+              placeholder={pleaseEnter + "Price"}
+              onChange={onFieldChange}
+              name="price"
+              value={formData?.price}
+            />
           </Container>
 
           <Container>
             <Text Text="Category" m="0.5rem 0" ls="0.05rem" />
-            <Dropdown width="100%">
+            <Dropdown
+              width="100%"
+              onChange={onFieldChange}
+              name="category"
+              value={formData?.category}
+            >
               {categoryData?.map((item) => (
-                <option value="javascript">{item}</option>
+                <option value={item?.title} key={"key" + item?._id}>
+                  {item?.title}
+                </option>
               ))}
             </Dropdown>
           </Container>
         </>
       )}
 
-      <Button text="Add" m="0.5rem 0" width="100%" />
+      <Button text="Add" m="0.5rem 0" width="100%" isLoading={isLoading} />
     </StyledCard>
   );
 };
