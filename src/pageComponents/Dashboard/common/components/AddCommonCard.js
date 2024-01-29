@@ -16,8 +16,12 @@ const StyledCard = styled.form`
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   border-radius: 0.5rem;
-  margin: 1rem 0;
   padding: 1rem 2rem;
+
+  @media (max-width: 768px) {
+    margin: 1rem 0 0 0;
+    width: 100%;
+  }
 `;
 
 const Container = styled.div`
@@ -79,7 +83,7 @@ const AddCommonCard = (props) => {
 
   return (
     <StyledCard onSubmit={handleSubmit}>
-      <Heading Text={title} lh="0" />
+      <Heading Text={title} lh="3rem" />
       <Line m="0 0 1.5rem 0" width="100%" />
       {toggleButton !== type?.category?.key && (
         <Container>

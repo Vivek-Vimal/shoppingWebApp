@@ -20,16 +20,31 @@ const StyledHeading = styled.h1`
   font-style: ${(props) => (props?.italic ? "italic" : "normal")};
 
   @media only screen and (max-width: 1200px) {
-    font-size: ${(props) => (props.xm ? props.xm : "25px")};
+    font-size: ${(props) =>
+      props.xm ? props.xm : props.fs ? props.fs : "25px"};
     line-height: ${(props) => (props.lhXm ? props.lhXm : "")};
     text-align: ${(props) =>
       props.center ? "center" : props.mcenter ? "center" : "left"} !important;
-    width: 100%;
+    //width: 100%;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    font-size: ${(props) =>
+      props?.xsm
+        ? props?.xsm
+        : props.xm
+        ? props.xm
+        : props.fs
+        ? props.fs
+        : "25px"};
+    line-height: ${(props) =>
+      props?.mlh ? props?.mlh : props.lh ? props.lh : 0};
   }
 
   @media only screen and (max-width: 768px) {
-    font-size: ${(props) => (props.ms ? props.ms : "16px")};
+    font-size: ${(props) => (props.ms ? props.ms : "20px")};
     line-height: ${(props) => (props.lhMs ? props.lhMs : "")};
+    width: ${(props) => (props.mWidth ? props.mWidth : "initial")};
   }
 `;
 

@@ -89,7 +89,7 @@ const FooterMaster = () => {
             />
           </svg>
         </Flex>
-        <Text Text="@2024 All rights reserved" color="#EBD96B" />
+        <Text Text="@2024 All rights reserved" color="#EBD96B" lh="1.5rem" />
       </PageWidth>
     </PageLayout>
   );

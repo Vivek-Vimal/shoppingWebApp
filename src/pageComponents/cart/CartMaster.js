@@ -65,7 +65,7 @@ const CartMaster = () => {
         width="1400px"
       >
         {cartLength ? (
-          <>
+          <Flex lColumn jc="space-between" noCenter mCenter>
             <Flex column noCenter>
               {cartItem?.map((item) => (
                 <CartCard
@@ -80,10 +80,10 @@ const CartMaster = () => {
               ))}
             </Flex>
             <SummaryCard {...summaryCardProp} />
-          </>
+          </Flex>
         ) : (
           <>
-            <Heading Text="No Product in the cart" center />
+            <Heading Text="No Product in the cart" center lh="4rem" />
             <Button text="Continue Shopping" onClick={onClick} />
           </>
         )}

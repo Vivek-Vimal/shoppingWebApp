@@ -4,7 +4,8 @@ import styled from "styled-components";
 const StyledFlex = styled.div`
   display: flex;
   width: ${(props) => (props.width ? props.width : "100%")};
-  align-items: ${(props) => (props.noCenter ? "flex-start" : "center")};
+  align-items: ${(props) =>
+    props.noCenter ? "flex-start" : props?.align ? props?.align : "center"};
   flex-direction: ${(props) => (props.column ? "column" : "row")};
   justify-content: ${(props) => (props.jc ? props.jc : "flex-start")};
   margin: ${(props) => (props.m ? props.m : "")};
@@ -29,23 +30,51 @@ const StyledFlex = styled.div`
     border-radius: 20px;
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1400px) {
+    width: ${(props) =>
+      props?.m14Width ? props?.m14Width : props.width ? props.width : "100%"};
+  }
+
+  @media (max-width: 1200px) {
     flex-direction: ${(props) =>
-      props.column || props.lcolumn ? "column" : "row"};
+      props.column || props.lColumn ? "column" : "row"};
     margin: ${(props) =>
-      props.m ? props.m : props.sM ? props.sM : ""} !important;
+      props.sM ? props.sM : props.m ? props.m : ""} !important;
+    width: ${(props) =>
+      props?.mWidth
+        ? props?.mWidth
+        : props?.m14Width
+        ? props?.m14Width
+        : props.width
+        ? props.width
+        : "100%"};
+    align-items: ${(props) =>
+      props?.mCenter
+        ? "center"
+        : props.noCenter
+        ? "flex-start"
+        : props?.align
+        ? props?.align
+        : "center"};
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
+    display: ${(props) => (props?.hide ? "none" : "flex")};
+    justify-content: ${(props) =>
+      props.mjc ? props.mjc : props?.jc ? props?.jc : "flex-start"};
     flex-direction: ${(props) =>
-      props.column || props.lcolumn || props.mcolumn ? "column" : "row"};
-  }
-
-  @media (max-width: 450px) {
-    flex-direction: ${(props) =>
-      props.column || props.lcolumn || props.mcolumn || props.scolumn
-        ? "column"
-        : "row"};
+      props.column || props.lColumn || props.mColumn ? "column" : "row"};
+    width: ${(props) =>
+      props?.m10Width
+        ? props?.m10Width
+        : props?.mWidth
+        ? props?.mWidth
+        : props?.m14Width
+        ? props?.m14Width
+        : props.width
+        ? props.width
+        : "100%"};
+    padding: ${(props) => (props?.mp ? props?.mp : props?.p ? props?.p : "")};
   }
 `;
 
@@ -55,8 +84,8 @@ const Flex = ({
   scolumn,
   jc,
   m,
-  mcolumn,
-  lcolumn,
+  mColumn,
+  lColumn,
   noCenter,
   width,
   sM,
@@ -66,6 +95,14 @@ const Flex = ({
   position,
   bs,
   overflowY,
+  mWidth,
+  m14Width,
+  hide,
+  mjc,
+  m10Width,
+  mp,
+  mCenter,
+  align,
 }) => {
   return (
     <StyledFlex
@@ -73,8 +110,8 @@ const Flex = ({
       scolumn={scolumn}
       jc={jc}
       m={m}
-      mcolumn={mcolumn}
-      lcolumn={lcolumn}
+      mColumn={mColumn}
+      lColumn={lColumn}
       noCenter={noCenter}
       width={width}
       sM={sM}
@@ -84,6 +121,14 @@ const Flex = ({
       position={position}
       bs={bs}
       overflowY={overflowY}
+      mWidth={mWidth}
+      m14Width={m14Width}
+      hide={hide}
+      mjc={mjc}
+      m10Width={m10Width}
+      mp={mp}
+      mCenter={mCenter}
+      align={align}
     >
       {children}
     </StyledFlex>

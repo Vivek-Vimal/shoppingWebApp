@@ -18,13 +18,18 @@ const FilterAndSearchMaster = (props) => {
     });
   }, []);
   return (
-    <Flex bs="rgba(0, 0, 0, 0.09) 0px 3px 12px" p="2rem">
+    <Flex
+      bs="rgba(0, 0, 0, 0.09) 0px 3px 12px"
+      p="2rem"
+      m="1rem 0 0 0"
+      mp="1rem 0.5rem"
+    >
       <Flex jc={isLoading ? "center" : ""} wrap>
         {isLoading ? (
           <Spinner />
         ) : (
           categoryData?.map((item, index) => (
-            <Flex width="12rem">
+            <Flex width="auto" m="0 0.5rem">
               <Text transform="capitalize" Text={item?.title} />
 
               <Checkbox
@@ -32,6 +37,7 @@ const FilterAndSearchMaster = (props) => {
                 name={item?.title}
                 value={index}
                 onChange={onCheckboxChange}
+                m="0 0 0 1rem"
               />
             </Flex>
           ))

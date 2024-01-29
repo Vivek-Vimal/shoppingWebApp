@@ -13,6 +13,14 @@ const StyledCard = styled.div`
   position: relative;
   padding: 3rem;
   margin: 2rem 0 0 0;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+  @media (max-width: 450px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 const SummaryCard = (props) => {

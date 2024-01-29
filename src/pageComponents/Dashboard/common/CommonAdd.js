@@ -51,7 +51,7 @@ const CommonAdd = (props) => {
   const onDelete = (_id) => {
     toast((t) => (
       <div>
-        <Text Text="Are you sure to delete ?" fs="1.75rem" />
+        <Text Text="Are you sure to delete ?" fs="1.75rem" lh="3rem" />
         <Flex>
           <Button
             text="Yes"
@@ -124,12 +124,13 @@ const CommonAdd = (props) => {
       height="550px"
       bs="rgba(0, 0, 0, 0.09) 0px 3px 12px;"
       overflowY
-      p="0.5rem 2rem"
-      wrap
+      p="2rem"
       noCenter
       jc="space-between"
+      mColumn
+      mp="2rem 0.5rem"
     >
-      <Flex width="50%" column noCenter={!isLoading}>
+      <Flex width="50%" m10Width="100%" column noCenter={!isLoading}>
         {isLoading ? (
           <Spinner m="4rem 0 0 0" />
         ) : (
@@ -150,7 +151,7 @@ const CommonAdd = (props) => {
                   <img
                     src={item?.url}
                     alt=""
-                    style={{ height: "6rem", width: "6rem", margin: "1rem" }}
+                    style={{ height: "6rem", width: "7rem", margin: "1rem" }}
                   />
                   <ImCross
                     color="red"
@@ -165,7 +166,7 @@ const CommonAdd = (props) => {
                 </div>
               ) : (
                 <Flex>
-                  <Text Text={item?.title} lh="1.5rem" />
+                  <Text Text={item?.title} lh="2rem" />
                   <ImCross
                     color="red"
                     style={{ margin: "0 0 0 2rem", cursor: "pointer" }}

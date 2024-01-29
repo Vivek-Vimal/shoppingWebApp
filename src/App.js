@@ -7,6 +7,7 @@ import NoPageFoundMasterPage from "./pages/noPageFound";
 import ProductMasterPage from "./pages/productPage";
 import DashboardPage from "./pages/dashboardPage";
 import { Toaster } from "react-hot-toast";
+import AccountPageMaster from "./pages/accountPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/cart" element={<CartmasterPage />} exact />
         <Route path="/product" element={<ProductMasterPage />} exact />
         <Route path="/dashboard" element={<DashboardPage />} exact />
+        <Route path="/account" element={<AccountPageMaster />} exact />
         <Route path="/*" element={<NoPageFoundMasterPage />} />
       </Routes>
     </>

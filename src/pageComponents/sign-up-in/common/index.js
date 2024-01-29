@@ -17,11 +17,15 @@ const StyledSignUp = styled.form`
   flex-direction: column;
   padding: 3rem;
   position: relative;
+
+  @media only screen and (max-width: 548px) {
+    padding: 3rem 1rem 1rem 1rem;
+  }
 `;
 
 const SignIN = styled.div`
   position: absolute;
-  top: 0.5rem;
+  top: 1rem;
   right: 2rem;
   cursor: pointer;
 `;
@@ -109,14 +113,14 @@ const SignUpIn = (props) => {
       <Heading
         Text={isUpIn === "signIn" ? "Sign In" : "Sign Up"}
         center
-        lh="0"
+        m="0 0 2rem 0"
       />
 
       {isUpIn === "signUp" && (
         <>
           <div style={{ margin: margin }}>
             <Flex>
-              <Text Text="User Name" />
+              <Text Text="User Name" lh="1.5rem" />
               <TiStar />
             </Flex>
             <Input
@@ -124,6 +128,7 @@ const SignUpIn = (props) => {
               value={formData?.userName}
               placeholder={placeholderText + "user name"}
               width="23rem"
+              mWidth="100%"
               onChange={onChange}
             />
           </div>
@@ -132,7 +137,7 @@ const SignUpIn = (props) => {
 
       <div style={{ margin: margin }}>
         <Flex>
-          <Text Text="E-Mail" />
+          <Text Text="E-Mail" lh="1.5rem" />
           <TiStar />
         </Flex>
         <Input
@@ -140,6 +145,7 @@ const SignUpIn = (props) => {
           value={formData?.email}
           placeholder={placeholderText + "e-mail"}
           width="23rem"
+          mWidth="100%"
           onChange={onChange}
         />
       </div>
@@ -147,7 +153,7 @@ const SignUpIn = (props) => {
       <div style={{ margin: margin }}>
         <Flex jc="space-between">
           <Flex>
-            <Text Text="Password" />
+            <Text Text="Password" lh="1.5rem" />
 
             <TiStar />
           </Flex>
@@ -160,6 +166,7 @@ const SignUpIn = (props) => {
               onChange={onCheckboxChange}
               width="1rem"
               height="1rem"
+              m="0 0 0 1rem"
             />
           </Flex>
         </Flex>
@@ -168,6 +175,7 @@ const SignUpIn = (props) => {
           value={formData?.password}
           placeholder={placeholderText + "password"}
           width="23rem"
+          mWidth="100%"
           onChange={onChange}
           type={isChecked ? "text" : "password"}
         />

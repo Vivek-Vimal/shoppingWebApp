@@ -60,7 +60,6 @@ const CommonProduct = () => {
   };
 
   const onCheckboxChange = (props) => {
-    
     setIsSearchClicked((prev) => ({ ...prev, checkboxButton: true }));
 
     const index = selectedCategory?.findIndex(
@@ -145,19 +144,20 @@ const CommonProduct = () => {
   return (
     <PageLayout
       start={path === "/product" ? true : false}
-      padding={path === "/product" ? "7rem 0 0 0" : "0"}
+      padding={path === "/product" ? "7rem 0 0 0" : "2rem 0 0 0"}
     >
       <PageWidth>
         <Flex>
           <Heading
             Text={path === "/product" ? "Products" : "New Arrivals"}
             fs="3rem"
+            lh="3rem"
           />
         </Flex>
         {path === "/product" && (
           <FilterAndSearchMaster {...searchFilterProps} />
         )}
-        <Flex wrap jc={isLoading ? "center" : ""}>
+        <Flex wrap jc={isLoading ? "center" : ""} align="stretch">
           {isLoading ? (
             <Spinner m="5rem 0 0 0" />
           ) : displayProductData?.length > 0 ? (
@@ -174,7 +174,15 @@ const CommonProduct = () => {
             ))
           ) : (
             <Flex jc="center">
-              <Heading Text="No Match found" center m="5rem 0 0 0" />
+              <Heading
+                Text={
+                  path === "/product"
+                    ? "No Match found"
+                    : "No Product available"
+                }
+                center
+                m="5rem 0 0 0"
+              />
             </Flex>
           )}
 

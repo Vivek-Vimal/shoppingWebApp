@@ -14,8 +14,13 @@ const SearchButton = styled(FaSearch)`
 const Search = (props) => {
   const { onSearch = () => {}, onChange = () => {}, searchinput } = props;
   return (
-    <Flex width="30rem" position="relative">
-      <Input placeholder="Search" width="100%" onChange={onChange} value={searchinput} />
+    <Flex width="30rem" m10Width="20rem" position="relative">
+      <Input
+        placeholder="Search"
+        width="100%"
+        onChange={onChange}
+        value={searchinput}
+      />
       <SearchButton size="1.75rem" onClick={onSearch} />
     </Flex>
   );

@@ -15,6 +15,11 @@ const StyledInput = styled.input`
   width: ${(props) => (props.width ? props.width : "12rem")};
   padding: 0 0 0 1rem;
 
+  @media only screen and (max-width: 768px) {
+    width: ${(props) =>
+      props.mWidth ? props.mWidth : props?.width ? props?.width : "12rem"};
+  }
+
   &::placeholder {
     color: #666666;
     font-size: 16px;

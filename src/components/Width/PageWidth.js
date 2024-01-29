@@ -25,10 +25,6 @@ const StyledWidth = styled.section`
   @meia only screen and (max-width: 1400px) {
     width: ${(props) => (props.full ? "100%" : "98%")};
   }
-  @media only screen and (max-width: 540px) {
-    width: 100%;
-    padding: ${(props) => (props.sp ? props.sp : "0 1rem")};
-  }
 `;
 const PageWidth = ({
   children,

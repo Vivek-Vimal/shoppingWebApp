@@ -13,6 +13,14 @@ const StyledCard = styled.div`
   width: 45rem;
   position: relative;
   margin: 2rem 0 0 0;
+
+  @media (max-width: 1400px) {
+    width: 40rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Image = styled.div`
@@ -25,6 +33,7 @@ const ItemCount = styled.div`
   border: 1px solid grey;
   border-radius: 0.25rem;
   padding: 0.5rem;
+  display: flex;
 `;
 
 const CartCard = (props) => {
@@ -48,7 +57,7 @@ const CartCard = (props) => {
       </Image>
       <Flex noCenter column jc="space-between" p="1rem 2rem">
         <div>
-          <Heading Text={displayTitle} fs="1.5rem" />
+          <Heading Text={displayTitle} fs="1.5rem" lh="2.5rem" />
           <Text Text={category} fs="1rem" />
         </div>
         <Flex jc="space-between">

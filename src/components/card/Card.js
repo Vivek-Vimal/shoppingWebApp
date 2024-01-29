@@ -8,13 +8,12 @@ import { Button } from "../Button";
 
 const Box = styled.div`
   width: 22rem;
-  min-height: 30rem;
-  margin: 2rem auto 0 auto;
+  margin: 2rem 0.5rem 0 0;
   border-radius: 1.75rem 1.75rem 0 0;
   padding: 1rem;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
     rgb(209, 213, 219) 0px 0px 0px 1px inset;
-  @media only screen and (max-width: 510px) {
+  @media only screen and (max-width: 768px) {
     width: 98%;
   }
 `;
@@ -44,9 +43,9 @@ const Card = (props) => {
         />
       </Image>
       <div style={{ margin: "2rem 0 0 0" }}>
-        <Heading Text={displayTitle} fs="1.5rem" />
+        <Heading Text={displayTitle} fs="1.5rem" lh="2.5rem" />
         <Text Text={displayDesc} lh="1.5rem" />
-        <Flex jc="space-between">
+        <Flex jc="space-between" m="0.5rem 0 0 0">
           <Heading Text={props?.price} />
           <Button onClick={props?.addToCart} text="add to cart" width="10rem" />
         </Flex>

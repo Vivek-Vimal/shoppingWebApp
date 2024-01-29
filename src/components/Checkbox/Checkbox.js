@@ -5,6 +5,7 @@ const StyledCheckbox = styled.input`
   cursor: pointer;
   width: ${(props) => (props?.width ? props?.width : "1.5rem")};
   height: ${(props) => (props?.height ? props?.height : "1.5rem")};
+  margin: ${(props) => (props?.m ? props?.m : 0)};
 `;
 
 const Checkbox = (props) => {
