@@ -7,9 +7,7 @@ import img from "../../assets/Background.png";
 const SignUpInMaster = () => {
   const [isUpIn, setIsUpIn] = useState("signUp");
 
-  const onSignUpIn = () => {
-    
-  };
+  const onSignUpIn = () => {};
 
   const signUpInProps = {
     isUpIn,
@@ -18,7 +16,7 @@ const SignUpInMaster = () => {
   };
 
   return (
-    <PageLayout img={img}>
+    <PageLayout img={img} height="100vh">
       <PageWidth>
         <SignUpIn {...signUpInProps} />
       </PageWidth>

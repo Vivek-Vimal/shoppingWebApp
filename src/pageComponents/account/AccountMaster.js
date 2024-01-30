@@ -5,7 +5,7 @@ import { AccountCard } from "../../components/card";
 
 const AccountMaster = () => {
   return (
-    <PageLayout>
+    <PageLayout height="calc(100vh - 12rem)">
       <PageWidth>
         <AccountCard />
       </PageWidth>

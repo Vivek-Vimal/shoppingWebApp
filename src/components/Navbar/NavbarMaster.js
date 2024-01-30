@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Flex from "../Styling/Flex";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Heading } from "../Heading";
 import {
@@ -16,14 +15,19 @@ import {
   CloseIcon,
 } from "./components/NavbarCss";
 import MenuContainer from "./components/MenuContainer";
+import AccountCard from "./components/AccountCard";
+import { useNavigate } from "react-router-dom";
+import bgImg from "../../assets/Background.png";
 
 const Navbar = () => {
   const number = useSelector((count) => count?.cartReducer?.itemCount);
   const itemDisplay = number > 0 ? number : null;
 
   const path = window.location.pathname;
+  const navigate = useNavigate();
 
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [isAccountCard, setIsAccountCard] = useState(false);
 
   const onSideBar = () => {
     setIsSideBarOpen(true);
@@ -33,16 +37,36 @@ const Navbar = () => {
     setIsSideBarOpen(false);
   };
 
+  const onAccountCard = () => {
+    setIsAccountCard(() => !isAccountCard);
+  };
+
+  const onCart = () => {
+    navigate("/cart");
+    setIsAccountCard(() => false);
+  };
+
+  const onAccount = () => {
+    navigate("/account");
+    setIsAccountCard(() => false);
+  };
+
+  const accountCardProp = {
+    onAccount,
+    setIsAccountCard,
+  };
+
   return (
     <>
       <StyledNav>
         <NavItem to="/home">
-          <Flex width="20rem" mWidth="15rem" m10Width="10rem">
+          <Flex width="20rem" mWidth="15rem" m10Width="10rem" xsw="100%">
             <HomeIcon color={path === "/home" ? "green" : "#000"} />
             <Heading
               Text="Let's Shop"
               lh="0"
               color={path === "/home" ? "green" : "#000"}
+              null
             />
           </Flex>
         </NavItem>
@@ -65,19 +89,23 @@ const Navbar = () => {
             m="0 5rem 0 0"
             sM="0 3rem 0 0"
           >
-            <Link to="/cart">
-              <CartContainer>
-                <CartIcon color={path === "/cart" ? "green" : "#000"} />
-                <CartNumberDisplay path={path}>{itemDisplay}</CartNumberDisplay>
-              </CartContainer>
-            </Link>
-            <AccountIcon />
+            <CartContainer onClick={onCart}>
+              <CartIcon color={path === "/cart" ? "green" : "#000"} />
+              <CartNumberDisplay path={path}>{itemDisplay}</CartNumberDisplay>
+            </CartContainer>
+
+            <>
+              <AccountIcon onClick={onAccountCard} />
+              {isAccountCard && <AccountCard {...accountCardProp} />}
+            </>
+
             <BurgerIcon onClick={onSideBar} />
           </Flex>
         </Flex>
       </StyledNav>
+
       {isSideBarOpen && (
-        <SideBar>
+        <SideBar img={bgImg}>
           <div style={{ height: "3rem" }} />
           <MenuContainer />
           <CloseIcon onClick={onClose} />

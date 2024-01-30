@@ -5,7 +5,7 @@ import { Heading } from "../../components/Heading";
 import { Text } from "../../components/Text";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-import { axiosGet } from "../../api/components/GET";
+import { AxiosGet } from "../../api/components/GET";
 import Spinner from "../../components/Spinner";
 import ImageGallery from "react-image-gallery";
 import { useWindowDimensions } from "../../hooks";
@@ -15,6 +15,8 @@ import {
   ResponsiveConatiner,
   HeadingConatiner,
 } from "./HomeCss";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const HomeMaster = () => {
   const navigate = useNavigate();
@@ -23,6 +25,8 @@ const HomeMaster = () => {
   const onClick = () => {
     navigate("/product");
   };
+
+  const token = useSelector((state) => state?.tokenReducer?.token);
 
   const [slideImgData, setSlideImgData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -59,10 +63,16 @@ const HomeMaster = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    axiosGet({ endPoint: "slideImg" })?.then((res) => {
-      setSlideImgData(res?.data);
-      setIsLoading(false);
+    AxiosGet({ endPoint: "slideImg", token })?.then((res) => {
+      if (res?.status === 200) {
+        setSlideImgData(res?.data);
+        setIsLoading(false);
+      } else {
+        toast.error(res?.response?.data?.message);
+        setIsLoading(false);
+      }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const commonCss = {
@@ -76,7 +86,7 @@ const HomeMaster = () => {
 
   return (
     <PageLayout>
-      <PageWidth bg="#F4F6F5" boxShadow padding="3rem 0">
+      <PageWidth bg="#F4F6F5" boxShadow padding="3rem 0" margin="0 0 2rem 0">
         <ResponsiveConatiner>
           <LeftHeroSec>
             <HeadingConatiner>

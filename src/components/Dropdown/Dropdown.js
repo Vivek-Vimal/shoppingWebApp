@@ -25,7 +25,8 @@ const StyledDropdown = styled.select`
 `;
 
 const Dropdown = (props) => {
-  return <StyledDropdown {...props} />;
+  const { placeholder } = props;
+  return <StyledDropdown {...props} placeholder={placeholder} />;
 };
 
 export default Dropdown;

@@ -4,10 +4,11 @@ import { PageWidth } from "../../components/Width";
 import { Heading } from "../../components/Heading";
 
 const NoPageFound = () => {
+  const message = "No Page Found";
   return (
     <PageLayout>
       <PageWidth>
-        <Heading Text="No Page Found" />
+        <Heading Text={message} />
       </PageWidth>
     </PageLayout>
   );

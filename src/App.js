@@ -1,4 +1,3 @@
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { SignUpInMaster } from "./pageComponents/sign-up-in";
 import CartmasterPage from "./pages/cartMasterPage";

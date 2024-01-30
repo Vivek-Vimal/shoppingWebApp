@@ -3,20 +3,25 @@ import Flex from "../Styling/Flex";
 import { Text } from "../Text";
 import { Checkbox } from "../Checkbox";
 import { Search } from "../Search";
-import { axiosGet } from "../../api/components/GET";
+import { AxiosGet } from "../../api/components/GET";
 import Spinner from "../Spinner";
+import { useSelector } from "react-redux";
 
 const FilterAndSearchMaster = (props) => {
   const { onCheckboxChange } = props;
   const [categoryData, setCategoryData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const token = useSelector((state) => state?.tokenReducer?.token);;
+
   useEffect(() => {
     setIsLoading(true);
-    axiosGet({ endPoint: "category" })?.then((res) => {
+    AxiosGet({ endPoint: "category", token })?.then((res) => {
       setCategoryData(res?.data);
       setIsLoading(false);
     });
   }, []);
+
   return (
     <Flex
       bs="rgba(0, 0, 0, 0.09) 0px 3px 12px"

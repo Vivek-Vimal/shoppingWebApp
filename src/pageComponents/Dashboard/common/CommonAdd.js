@@ -3,14 +3,17 @@ import Flex from "../../../components/Styling/Flex";
 import { Text } from "../../../components/Text";
 import AddCommonCard from "./components/AddCommonCard";
 import { type } from "../../../constants";
-import { axiosGet, axiosDelete } from "../../../api";
+import { AxiosGet, axiosDelete } from "../../../api";
 import Spinner from "../../../components/Spinner";
 import { ImCross } from "react-icons/im";
 import toast from "react-hot-toast";
 import { Button } from "../../../components/Button";
+import { useSelector } from "react-redux";
 
 const CommonAdd = (props) => {
   const { toggleButton } = props;
+
+  const token = useSelector((state) => state?.tokenReducer?.token);
 
   const obj = {
     url: "",
@@ -31,14 +34,14 @@ const CommonAdd = (props) => {
 
   const getFun = () => {
     setIsLoading(true);
-    axiosGet({ endPoint })?.then((res) => {
+    AxiosGet({ endPoint, token })?.then((res) => {
       setIsLoading(false);
       setDisplayData(res?.data);
     });
   };
 
   const deleteApiCall = (_id) => {
-    axiosDelete({ endPoint, payload: { _id } })?.then((res) => {
+    axiosDelete({ endPoint, payload: { _id }, token })?.then((res) => {
       if (res?.status === 200) {
         //toast.success(res?.data);
         setTimeToFetchGet(() => !timeToFetchGet);
@@ -77,7 +80,7 @@ const CommonAdd = (props) => {
       case type?.product?.key:
         setTitle("Add Product");
         setPointName("product");
-        axiosGet({ endPoint: "category" })?.then((res) => {
+        AxiosGet({ endPoint: "category", token })?.then((res) => {
           setCategoryData(res?.data);
         });
         setFormData(obj);
@@ -129,6 +132,7 @@ const CommonAdd = (props) => {
       jc="space-between"
       mColumn
       mp="2rem 0.5rem"
+      mHeight="100%"
     >
       <Flex width="50%" m10Width="100%" column noCenter={!isLoading}>
         {isLoading ? (
@@ -166,7 +170,7 @@ const CommonAdd = (props) => {
                 </div>
               ) : (
                 <Flex>
-                  <Text Text={item?.title} lh="2rem" />
+                  <Text Text={item?.title} lh="2rem" sm="0 0 0 1rem" />
                   <ImCross
                     color="red"
                     style={{ margin: "0 0 0 2rem", cursor: "pointer" }}

@@ -9,8 +9,8 @@ import { Modal } from "react-responsive-modal";
 import { addItem, category } from "../../../store/action";
 import { DetailCard } from "../../../components/card";
 import { FilterAndSearchMaster } from "../../../components/FilterAndSearch";
-import { axiosGet } from "../../../api/components/GET";
-import { useDispatch } from "react-redux";
+import { AxiosGet } from "../../../api/components/GET";
+import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../../components/Spinner";
 
 const CommonProduct = () => {
@@ -30,6 +30,7 @@ const CommonProduct = () => {
   const [filteredData, setFilteredData] = useState([]);
 
   const path = window.location.pathname;
+  const token = useSelector((state) => state?.tokenReducer?.token);
 
   const modalFun = (item) => {
     setIsModelOpen(true);
@@ -86,7 +87,7 @@ const CommonProduct = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    axiosGet({ endPoint: "product" })?.then((res) => {
+    AxiosGet({ endPoint: "product", token })?.then((res) => {
       setIsLoading(false);
       setProductData(res?.data);
     });
@@ -142,10 +143,7 @@ const CommonProduct = () => {
   };
 
   return (
-    <PageLayout
-      start={path === "/product" ? true : false}
-      padding={path === "/product" ? "7rem 0 0 0" : "2rem 0 0 0"}
-    >
+    <PageLayout start={path === "/product" ? true : false} padding="2rem 0 0 0">
       <PageWidth>
         <Flex>
           <Heading

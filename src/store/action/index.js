@@ -5,6 +5,7 @@ import {
   DECREMENT,
   CLEAR_ALL,
   CATEGORY,
+  TOKEN,
 } from "./ActionType";
 
 export const addItem = {
@@ -28,4 +29,8 @@ export const clearAll = {
 
 export const category = {
   type: CATEGORY,
+};
+
+export const token = {
+  type: TOKEN,
 };

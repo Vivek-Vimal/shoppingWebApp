@@ -7,9 +7,11 @@ import { Text } from "../../../components/Text";
 import { TiStar } from "react-icons/ti";
 import Flex from "../../../components/Styling/Flex";
 import toast from "react-hot-toast";
-import { axiosPost } from "../../../api";
+import { AxiosPost } from "../../../api";
 import { useNavigate } from "react-router-dom";
 import { Checkbox } from "../../../components/Checkbox";
+import { useDispatch } from "react-redux";
+import { token } from "../../../store/action";
 
 const StyledSignUp = styled.form`
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -34,6 +36,7 @@ const SignUpIn = (props) => {
   const { isUpIn, setIsUpIn, onClick } = props;
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const formObj = {
     userName: "",
@@ -78,9 +81,10 @@ const SignUpIn = (props) => {
       toast.error("Please fill all the required fields");
     } else {
       setIsLoading(true);
-      axiosPost({ ...signInUpProps }).then((res) => {
+      AxiosPost({ ...signInUpProps }).then((res) => {
         setIsLoading(false);
         if (res?.status === 200) {
+          dispatch({ ...token, payload: res?.data });
           toast.success(res?.data?.message);
           if (isUpIn === "signUp") {
             setIsUpIn("signIn");
@@ -94,7 +98,7 @@ const SignUpIn = (props) => {
     }
   };
 
-  const margin = "0 0 1rem 0";
+  const margin = "0 0 0.5rem 0";
   const placeholderText = "please enter ";
 
   return (
@@ -120,7 +124,7 @@ const SignUpIn = (props) => {
         <>
           <div style={{ margin: margin }}>
             <Flex>
-              <Text Text="User Name" lh="1.5rem" />
+              <Text Text="User Name" lh="2.5rem" />
               <TiStar />
             </Flex>
             <Input
@@ -137,7 +141,7 @@ const SignUpIn = (props) => {
 
       <div style={{ margin: margin }}>
         <Flex>
-          <Text Text="E-Mail" lh="1.5rem" />
+          <Text Text="E-Mail" lh="2.5rem" />
           <TiStar />
         </Flex>
         <Input
@@ -153,7 +157,7 @@ const SignUpIn = (props) => {
       <div style={{ margin: margin }}>
         <Flex jc="space-between">
           <Flex>
-            <Text Text="Password" lh="1.5rem" />
+            <Text Text="Password" lh="2.5rem" />
 
             <TiStar />
           </Flex>

@@ -1,5 +1,5 @@
-import { axiosGet } from "./components/GET";
-import { axiosPost } from "./components/POST";
+import { AxiosGet } from "./components/GET";
+import { AxiosPost } from "./components/POST";
 import { axiosDelete } from "./components/DELETE";
 
-export { axiosGet, axiosPost, axiosDelete };
+export { AxiosGet, AxiosPost, axiosDelete };

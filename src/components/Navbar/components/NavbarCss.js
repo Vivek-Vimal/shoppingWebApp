@@ -12,7 +12,7 @@ export const StyledNav = styled.nav`
   justify-content: space-between;
   width: 100%;
   height: 6rem;
-  position: fixed;
+  position: sticky;
   top: 0;
   z-index: 99;
   background-color: rgba(255, 255, 255, 0.75);
@@ -43,6 +43,7 @@ export const CartNumberDisplay = styled.span`
 const commonCss = `
   width: 2.5rem;
   height: 2.5rem;
+  cursor: pointer;
 
   @media only screen and (max-width: 1200px) {
     width: 2rem;
@@ -98,13 +99,20 @@ export const HomeIcon = styled(AiOutlineAliwangwang)`
 `;
 
 export const SideBar = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 999;
-  height: 100%;
+  min-height: 100vh;
   width: 100%;
   display: none;
   flex-direction: column;
   background-color: #fff;
+  top: 0;
+  overflow-y: visible;
+  background-image: url(${(props) => (props?.img ? props?.img : "")});
+  background-position: 0 10vh;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
   @media only screen and (max-width: 768px) {
     display: flex;
   }

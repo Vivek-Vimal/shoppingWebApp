@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Input } from "../../../../components/Input";
 import { Button } from "../../../../components/Button";
@@ -7,7 +7,7 @@ import { Dropdown } from "../../../../components/Dropdown";
 import { Heading } from "../../../../components/Heading";
 import { type } from "../../../../constants";
 import { Line } from "../../../../components/Line";
-import { axiosPost } from "../../../../api/index";
+import { AxiosPost } from "../../../../api/index";
 import toast from "react-hot-toast";
 
 const StyledCard = styled.form`
@@ -67,7 +67,7 @@ const AddCommonCard = (props) => {
         toast.error("Please fill all the required field/s");
       } else {
         setIsLoading(true);
-        axiosPost({ ...formProps })?.then((res) => {
+        AxiosPost({ ...formProps })?.then((res) => {
           if (res?.status === 201) {
             setFormData([]);
             setIsLoading(false);
@@ -138,12 +138,10 @@ const AddCommonCard = (props) => {
 
           <Container>
             <Text Text="Category" m="0.5rem 0" ls="0.05rem" />
-            <Dropdown
-              width="100%"
-              onChange={onFieldChange}
-              name="category"
-              value={formData?.category}
-            >
+            <Dropdown width="100%" onChange={onFieldChange} name="category">
+              <option disabled selected={formData?.category ? false : true}>
+                select category
+              </option>
               {categoryData?.map((item) => (
                 <option value={item?.title} key={"key" + item?._id}>
                   {item?.title}

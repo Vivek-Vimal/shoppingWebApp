@@ -2,31 +2,41 @@ import React, { useEffect, useState } from "react";
 import { PageLayout } from "../../components/PageLayout";
 import { PageWidth } from "../../components/Width";
 import Flex from "../../components/Styling/Flex";
-import { axiosGet } from "../../api/components/GET";
+import { AxiosGet } from "../../api/components/GET";
 import Spinner from "../../components/Spinner";
+import { useSelector } from "react-redux";
 
 const BrandMaster = () => {
   const [brandImg, setBrandImg] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const token = useSelector((state) => state?.tokenReducer?.token);
+
   useEffect(() => {
     setIsLoading(true);
-    axiosGet({ endPoint: "brand" })?.then((res) => {
+    AxiosGet({ endPoint: "brand", token })?.then((res) => {
       setIsLoading(false);
       setBrandImg(res?.data);
     });
   }, []);
+
   return (
-    <PageLayout height="9rem" bg="#EBD96B">
+    <PageLayout height="100%" bg="#EBD96B">
       <PageWidth>
-        <Flex wrap jc={isLoading ? "center" : ""}>
+        <Flex wrap jc={isLoading ? "center" : ""} xjc="center">
           {isLoading ? (
-            <Spinner />
+            <Spinner m="3rem 0" />
           ) : (
             brandImg?.map((img) => (
               <img
                 src={img?.url}
                 alt=""
-                style={{ width: "7.5rem", height: "5rem", margin: "0 2rem" }}
+                style={{
+                  width: "7.5rem",
+                  height: "5rem",
+                  margin: "2rem",
+                  borderRadius: "0.25rem",
+                }}
               />
             ))
           )}

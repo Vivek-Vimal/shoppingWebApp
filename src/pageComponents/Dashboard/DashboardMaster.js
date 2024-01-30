@@ -19,7 +19,7 @@ const DashboardMaster = () => {
   };
 
   return (
-    <PageLayout start m="7rem 0 0 0">
+    <PageLayout start>
       <PageWidth width="1600px">
         <Heading Text="Welcome User Admin" width="100%" lh="4rem" />
         <ButtonGroup {...buttonGroupProps} m="1rem 0 2rem 0" />

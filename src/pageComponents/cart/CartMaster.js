@@ -46,14 +46,11 @@ const CartMaster = () => {
   };
 
   return (
-    <PageLayout
-      start={cartLength ? true : false}
-      padding={cartLength ? "7rem 0 0 0" : "0"}
-    >
+    <PageLayout start={cartLength ? true : false} height="calc(100vh - 12rem)">
       {cartLength && (
         <PageWidth height="6rem">
           <Flex>
-            <Heading Text="Checkout" fs="3rem" />
+            <Heading Text="Checkout" fs="3rem" lh="5rem" />
           </Flex>
         </PageWidth>
       )}

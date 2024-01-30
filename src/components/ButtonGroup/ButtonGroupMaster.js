@@ -7,7 +7,7 @@ const ButtonGroupMaster = (props) => {
   const { toggleButton, onClick } = props;
 
   return (
-    <Flex {...props} wrap>
+    <Flex {...props} wrap mjc="center">
       <Button
         dis={toggleButton !== type?.product?.key}
         br="0"

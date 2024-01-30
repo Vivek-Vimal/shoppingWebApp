@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const StyledPageLayout = styled.section`
   width: 100%;
-  min-height: ${(props) => (props.height ? props.height : "100vh")};
+  min-height: ${(props) => (props.height ? props.height : "100%")};
   display: flex;
   align-items: center;
   justify-content: ${(props) => (props.start ? "flex-start" : "center")};

@@ -25,7 +25,6 @@ const StyledHeading = styled.h1`
     line-height: ${(props) => (props.lhXm ? props.lhXm : "")};
     text-align: ${(props) =>
       props.center ? "center" : props.mcenter ? "center" : "left"} !important;
-    //width: 100%;
   }
 
   @media only screen and (max-width: 1200px) {
@@ -45,6 +44,11 @@ const StyledHeading = styled.h1`
     font-size: ${(props) => (props.ms ? props.ms : "20px")};
     line-height: ${(props) => (props.lhMs ? props.lhMs : "")};
     width: ${(props) => (props.mWidth ? props.mWidth : "initial")};
+    margin: ${(props) => (props.sm ? props.sm : props?.m ? props?.m : "")};
+  }
+
+  @media only screen and (max-width: 380px) {
+    display: ${(props) => (props?.null ? "none" : "")};
   }
 `;
 

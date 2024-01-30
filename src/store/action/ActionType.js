@@ -4,3 +4,4 @@ export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
 export const CLEAR_ALL = "CLEAR_ALL";
 export const CATEGORY = "CATEGORY";
+export const TOKEN = "TOKEN";

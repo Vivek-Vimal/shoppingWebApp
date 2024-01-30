@@ -38,8 +38,7 @@ const StyledFlex = styled.div`
   @media (max-width: 1200px) {
     flex-direction: ${(props) =>
       props.column || props.lColumn ? "column" : "row"};
-    margin: ${(props) =>
-      props.sM ? props.sM : props.m ? props.m : ""} !important;
+    margin: ${(props) => (props.sM ? props.sM : props.m ? props.m : "")};
     width: ${(props) =>
       props?.mWidth
         ? props?.mWidth
@@ -75,6 +74,31 @@ const StyledFlex = styled.div`
         ? props.width
         : "100%"};
     padding: ${(props) => (props?.mp ? props?.mp : props?.p ? props?.p : "")};
+    height: ${(props) =>
+      props?.mHeight ? props?.mHeight : props?.height ? props?.height : ""};
+  }
+
+  @media only screen and (max-width: 390px) {
+    width: ${(props) =>
+      props?.xsw
+        ? props?.xsw
+        : props?.m10Width
+        ? props?.m10Width
+        : props?.mWidth
+        ? props?.mWidth
+        : props?.m14Width
+        ? props?.m14Width
+        : props.width
+        ? props.width
+        : "100%"};
+    justify-content: ${(props) =>
+      props?.xjc
+        ? props?.xjc
+        : props.mjc
+        ? props.mjc
+        : props?.jc
+        ? props?.jc
+        : "flex-start"};
   }
 `;
 
@@ -103,6 +127,9 @@ const Flex = ({
   mp,
   mCenter,
   align,
+  mHeight,
+  xsw,
+  xjc,
 }) => {
   return (
     <StyledFlex
@@ -129,6 +156,9 @@ const Flex = ({
       mp={mp}
       mCenter={mCenter}
       align={align}
+      mHeight={mHeight}
+      xsw={xsw}
+      xjc={xjc}
     >
       {children}
     </StyledFlex>

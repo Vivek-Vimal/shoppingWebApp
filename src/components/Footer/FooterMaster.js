@@ -1,14 +1,23 @@
 import React from "react";
-import { PageLayout } from "../PageLayout";
 import { PageWidth } from "../Width";
 import Flex from "../Styling/Flex";
 import { Text } from "../Text";
+import styled from "styled-components";
+
+const StyledFooter = styled.footer`
+  background-color: #000000;
+  height: 10rem;
+  margin: 2rem 0 0 0;
+  width: 100%;
+  display: grid;
+  place-items: center;
+`;
 
 const FooterMaster = () => {
   return (
-    <PageLayout bg="#000000" height="10rem" m="2rem 0 0 0">
+    <StyledFooter>
       <PageWidth jc="space-between" direction="row">
-        <Flex width="20rem">
+        <Flex width="10rem">
           <svg
             width="35"
             height="35"
@@ -89,9 +98,14 @@ const FooterMaster = () => {
             />
           </svg>
         </Flex>
-        <Text Text="@2024 All rights reserved" color="#EBD96B" lh="1.5rem" />
+        <Text
+          Text="@2024 All rights reserved"
+          color="#EBD96B"
+          lh="1.5rem"
+          align="right"
+        />
       </PageWidth>
-    </PageLayout>
+    </StyledFooter>
   );
 };
 

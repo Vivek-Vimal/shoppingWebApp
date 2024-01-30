@@ -55,7 +55,13 @@ const CartCard = (props) => {
       <Image>
         <img src={img} alt="" style={{ width: "100%", height: "100%" }} />
       </Image>
-      <Flex noCenter column jc="space-between" p="1rem 2rem">
+      <Flex
+        noCenter
+        column
+        jc="space-between"
+        p="1rem 2rem"
+        mp="1rem 1rem 1rem 0"
+      >
         <div>
           <Heading Text={displayTitle} fs="1.5rem" lh="2.5rem" />
           <Text Text={category} fs="1rem" />

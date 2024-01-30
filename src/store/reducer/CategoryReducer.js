@@ -1,6 +1,5 @@
 import { CATEGORY } from "../action/ActionType";
 import { productData } from "../../pageComponents/productNewArrival/DummyData";
-import { type } from "../../constants";
 
 const uniqueCategory = [];
 export const categoryReducer = (state = uniqueCategory, action) => {
