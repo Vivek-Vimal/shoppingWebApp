@@ -42,6 +42,8 @@ const AddCommonCard = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const token = window.localStorage.getItem("token");
+
   const pleaseEnter = "Please Enter ";
 
   const onFieldChange = (data) => {
@@ -67,7 +69,7 @@ const AddCommonCard = (props) => {
         toast.error("Please fill all the required field/s");
       } else {
         setIsLoading(true);
-        AxiosPost({ ...formProps })?.then((res) => {
+        AxiosPost({ ...formProps, token })?.then((res) => {
           if (res?.status === 201) {
             setFormData([]);
             setIsLoading(false);
