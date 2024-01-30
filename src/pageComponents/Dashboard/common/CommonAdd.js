@@ -8,12 +8,11 @@ import Spinner from "../../../components/Spinner";
 import { ImCross } from "react-icons/im";
 import toast from "react-hot-toast";
 import { Button } from "../../../components/Button";
-import { useSelector } from "react-redux";
 
 const CommonAdd = (props) => {
   const { toggleButton } = props;
 
-  const token = useSelector((state) => state?.tokenReducer?.token);
+  const token = window.localStorage.getItem('token');
 
   const obj = {
     url: "",

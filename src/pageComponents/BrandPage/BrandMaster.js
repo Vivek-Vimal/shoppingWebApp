@@ -4,13 +4,12 @@ import { PageWidth } from "../../components/Width";
 import Flex from "../../components/Styling/Flex";
 import { AxiosGet } from "../../api/components/GET";
 import Spinner from "../../components/Spinner";
-import { useSelector } from "react-redux";
 
 const BrandMaster = () => {
   const [brandImg, setBrandImg] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const token = useSelector((state) => state?.tokenReducer?.token);
+  const token = window.localStorage.getItem('token');
 
   useEffect(() => {
     setIsLoading(true);

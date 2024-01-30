@@ -5,14 +5,13 @@ import { Checkbox } from "../Checkbox";
 import { Search } from "../Search";
 import { AxiosGet } from "../../api/components/GET";
 import Spinner from "../Spinner";
-import { useSelector } from "react-redux";
 
 const FilterAndSearchMaster = (props) => {
   const { onCheckboxChange } = props;
   const [categoryData, setCategoryData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const token = useSelector((state) => state?.tokenReducer?.token);;
+  const token = window.localStorage.getItem("token");
 
   useEffect(() => {
     setIsLoading(true);

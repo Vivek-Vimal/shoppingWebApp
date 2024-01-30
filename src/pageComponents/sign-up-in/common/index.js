@@ -10,8 +10,6 @@ import toast from "react-hot-toast";
 import { AxiosPost } from "../../../api";
 import { useNavigate } from "react-router-dom";
 import { Checkbox } from "../../../components/Checkbox";
-import { useDispatch } from "react-redux";
-import { token } from "../../../store/action";
 
 const StyledSignUp = styled.form`
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -36,7 +34,6 @@ const SignUpIn = (props) => {
   const { isUpIn, setIsUpIn, onClick } = props;
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const formObj = {
     userName: "",
@@ -84,7 +81,8 @@ const SignUpIn = (props) => {
       AxiosPost({ ...signInUpProps }).then((res) => {
         setIsLoading(false);
         if (res?.status === 200) {
-          dispatch({ ...token, payload: res?.data });
+          window.localStorage.setItem("token", res?.data?.token);
+          window.localStorage.setItem("user", res?.data?.user?.email);
           toast.success(res?.data?.message);
           if (isUpIn === "signUp") {
             setIsUpIn("signIn");

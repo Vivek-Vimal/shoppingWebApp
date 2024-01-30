@@ -16,7 +16,6 @@ import {
   HeadingConatiner,
 } from "./HomeCss";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
 
 const HomeMaster = () => {
   const navigate = useNavigate();
@@ -26,7 +25,7 @@ const HomeMaster = () => {
     navigate("/product");
   };
 
-  const token = useSelector((state) => state?.tokenReducer?.token);
+  const token = window.localStorage.getItem('token')
 
   const [slideImgData, setSlideImgData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

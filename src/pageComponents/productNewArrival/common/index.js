@@ -10,7 +10,7 @@ import { addItem, category } from "../../../store/action";
 import { DetailCard } from "../../../components/card";
 import { FilterAndSearchMaster } from "../../../components/FilterAndSearch";
 import { AxiosGet } from "../../../api/components/GET";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Spinner from "../../../components/Spinner";
 
 const CommonProduct = () => {
@@ -30,7 +30,7 @@ const CommonProduct = () => {
   const [filteredData, setFilteredData] = useState([]);
 
   const path = window.location.pathname;
-  const token = useSelector((state) => state?.tokenReducer?.token);
+  const token = window.localStorage.getItem("token");
 
   const modalFun = (item) => {
     setIsModelOpen(true);
@@ -179,7 +179,8 @@ const CommonProduct = () => {
                     : "No Product available"
                 }
                 center
-                m="5rem 0 0 0"
+                m="2rem 0 0 0"
+                lh="4rem"
               />
             </Flex>
           )}

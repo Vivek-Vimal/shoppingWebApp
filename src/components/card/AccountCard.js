@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Text } from "../Text";
 import { Heading } from "../Heading";
 import Flex from "../Styling/Flex";
-import { useSelector } from "react-redux";
 import { useWindowDimensions } from "../../hooks";
 
 const StyledCard = styled.div`
@@ -16,24 +15,20 @@ const StyledCard = styled.div`
 `;
 
 const AccountCard = () => {
-  const userInfo = useSelector((state) => state?.tokenReducer);
+  const userInfo = window.localStorage.getItem("user");
+  const token = window.localStorage.getItem("token");
   const { width } = useWindowDimensions();
 
   return (
     <StyledCard>
       <Flex mColumn noCenter>
         <Text Text={"Your_email : "} lh="2rem" />
-        <Heading
-          Text={userInfo?.user?.email}
-          lh="2rem"
-          m="0 0 0 0.5rem"
-          sm="0"
-        />
+        <Heading Text={userInfo} lh="2rem" m="0 0 0 0.5rem" sm="0" />
       </Flex>
       <Flex mColumn noCenter m="1rem 0 0 0">
         <Text Text={"Your_Current_Token : "} lh="2rem" />
         <Text
-          Text={userInfo?.token?.slice(0, width > 500 ? 25 : 11) + "..."}
+          Text={token?.slice(0, width > 500 ? 25 : 11) + "..."}
           lh="2rem"
           m="0 0 0 0.5rem"
           sm="0"
