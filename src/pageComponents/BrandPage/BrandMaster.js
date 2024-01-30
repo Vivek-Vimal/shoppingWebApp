@@ -9,7 +9,7 @@ const BrandMaster = () => {
   const [brandImg, setBrandImg] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const token = window.localStorage.getItem('token');
+  const token = window.localStorage.getItem("token");
 
   useEffect(() => {
     setIsLoading(true);
@@ -17,6 +17,7 @@ const BrandMaster = () => {
       setIsLoading(false);
       setBrandImg(res?.data);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

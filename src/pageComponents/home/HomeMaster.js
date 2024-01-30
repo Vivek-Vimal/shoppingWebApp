@@ -25,7 +25,7 @@ const HomeMaster = () => {
     navigate("/product");
   };
 
-  const token = window.localStorage.getItem('token')
+  const token = window.localStorage.getItem("token");
 
   const [slideImgData, setSlideImgData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,6 +40,7 @@ const HomeMaster = () => {
     } else if (width < 900) {
       setSize({ width: 350, height: 375 });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width]);
 
   useEffect(() => {
@@ -58,6 +59,7 @@ const HomeMaster = () => {
         ]);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slideImgData?.length, size?.width]);
 
   useEffect(() => {

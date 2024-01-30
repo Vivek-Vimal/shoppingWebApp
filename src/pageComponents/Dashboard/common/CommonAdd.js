@@ -12,7 +12,7 @@ import { Button } from "../../../components/Button";
 const CommonAdd = (props) => {
   const { toggleButton } = props;
 
-  const token = window.localStorage.getItem('token');
+  const token = window.localStorage.getItem("token");
 
   const obj = {
     url: "",
@@ -102,12 +102,14 @@ const CommonAdd = (props) => {
       default:
         setTitle("Add");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toggleButton]);
 
   useEffect(() => {
     if (endPoint) {
       getFun();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeToFetchGet, endPoint]);
 
   const commonCardProps = {

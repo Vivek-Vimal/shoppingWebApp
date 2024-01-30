@@ -6,7 +6,7 @@ import { Card } from "../../../components/card";
 import Flex from "../../../components/Styling/Flex";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { addItem, category } from "../../../store/action";
+import { addItem } from "../../../store/action";
 import { DetailCard } from "../../../components/card";
 import { FilterAndSearchMaster } from "../../../components/FilterAndSearch";
 import { AxiosGet } from "../../../api/components/GET";
@@ -91,6 +91,7 @@ const CommonProduct = () => {
       setIsLoading(false);
       setProductData(res?.data);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -101,6 +102,7 @@ const CommonProduct = () => {
         setDisplayProductData(productData?.slice(0, 3));
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path, productData]);
 
   useEffect(() => {
@@ -113,6 +115,7 @@ const CommonProduct = () => {
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchinput, isSearchClicked]);
 
   useEffect(() => {
@@ -133,6 +136,7 @@ const CommonProduct = () => {
     } else if (isSearchClicked?.checkboxButton) {
       setDisplayProductData([...productData]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
 
   const searchFilterProps = {
