@@ -9,8 +9,9 @@ const StyledCard = styled.div`
   padding: 1rem;
   position: absolute;
   top: 5rem;
-  right: 1rem;
+  right: 2rem;
   z-index: 999;
+  min-width: 8rem;
 
   @media only screen and (max-width: 768px) {
     padding: 1rem;
@@ -33,12 +34,19 @@ const AccountCard = (props) => {
   return (
     <StyledCard>
       <Text
-        Text={"Logout(coming soon)"}
+        Text="Logout"
         lh="2rem"
         cursor="pointer"
         onClick={onLogout}
+        center
       />
-      <Text Text="Details" lh="2rem" onClick={onAccount} cursor="pointer" />
+      <Text
+        Text="Details"
+        lh="2rem"
+        onClick={onAccount}
+        cursor="pointer"
+        center
+      />
     </StyledCard>
   );
 };
