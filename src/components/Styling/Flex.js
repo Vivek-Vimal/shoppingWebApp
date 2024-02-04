@@ -26,7 +26,7 @@ const StyledFlex = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #ebd96b;
+    background-color: #0096FF;
     border-radius: 20px;
   }
 

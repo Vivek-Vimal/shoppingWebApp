@@ -16,7 +16,9 @@ const StyledButton = styled.button`
   cursor: "pointer" !important;
   pointer-events: ${(props) => (props?.isLoading ? "none" : "all")};
   min-width: ${(props) => (props.width ? props.width : "15rem")};
-  background: ${(props) => (props.bg ? props.bg : "#EBD96B")};
+  background: ${(props) => (props.bg ? props.bg : "#0096FF")};
+  
+  // #0096FF
   margin: ${(props) => (props.m ? props.m : "")};
   height: ${(props) => (props.height ? props.height : "")};
   z-index: 6;

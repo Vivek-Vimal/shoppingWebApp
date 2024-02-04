@@ -12,20 +12,24 @@ import { useNavigate } from "react-router-dom";
 import { Checkbox } from "../../../components/Checkbox";
 
 const StyledSignUp = styled.form`
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   display: flex;
   flex-direction: column;
   padding: 3rem;
   position: relative;
+  border-radius: 1rem;
 
   @media only screen and (max-width: 548px) {
     padding: 3rem 1rem 1rem 1rem;
+    width: 100%;
   }
 `;
 
 const SignIN = styled.div`
   position: absolute;
-  top: 1rem;
+  top: 1.5rem;
   right: 2rem;
   cursor: pointer;
 `;
@@ -80,7 +84,7 @@ const SignUpIn = (props) => {
       toast.error("Please fill all the required fields");
     } else {
       setIsLoading(true);
-      AxiosPost({ ...signInUpProps,token }).then((res) => {
+      AxiosPost({ ...signInUpProps, token }).then((res) => {
         setIsLoading(false);
         if (res?.status === 200) {
           window.localStorage.setItem("token", res?.data?.token);
@@ -110,7 +114,7 @@ const SignUpIn = (props) => {
       >
         <Text
           Text={isUpIn === "signUp" ? "Sign In" : "Sign Up"}
-          color="#E5C643"
+          color="#0096FF"
         />
       </SignIN>
 

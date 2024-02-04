@@ -6,7 +6,7 @@ const StyledDropdown = styled.select`
   font-weight: 400;
   line-height: 21px;
   letter-spacing: 0.075em;
-  border: 2px solid #ebd96b;
+  border: 2px solid #0096FF;
   border-radius: ${(props) => (props.br ? props.br : "0.5rem")};
   background-color: #ffffff;
   margin: ${(props) => (props.m ? props.m : "")};

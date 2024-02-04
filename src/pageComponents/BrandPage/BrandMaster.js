@@ -21,7 +21,7 @@ const BrandMaster = () => {
   }, []);
 
   return (
-    <PageLayout height="100%" bg="#EBD96B">
+    <PageLayout height="100%" bg="#0096FF">
       <PageWidth>
         <Flex wrap jc={isLoading ? "center" : ""} xjc="center">
           {isLoading ? (

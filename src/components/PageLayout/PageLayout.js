@@ -11,11 +11,16 @@ const StyledPageLayout = styled.section`
   padding: ${(props) => (props.padding ? props.padding : "0")};
   background: ${(props) => (props.bg ? props.bg : "#FFFFFF")};
   background-image: url(${(props) => (props?.img ? props?.img : "")});
-  background-position: 0 10vh;
+  background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  background-size: 100% auto;
   overflow-x: hidden;
   margin: ${(props) => (props?.m ? props?.m : "")};
+
+  @media only screen and (max-width: 1600px) {
+    background-size: auto 100%;
+  }
 `;
 
 const PageLayout = ({ children, bg, start, padding, img, height, m }) => {

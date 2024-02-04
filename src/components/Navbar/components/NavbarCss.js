@@ -35,7 +35,7 @@ export const CartNumberDisplay = styled.span`
   border-radius: 50%;
   font-weight: 700;
   font-size: 1.5rem;
-  background: ${(props) => (props?.path === "/cart" ? "green" : "#EBD96B")};
+  background: ${(props) => (props?.path === "/cart" ? "green" : "#0096FF")};
   padding: 0 0.5rem;
   color: ${(props) => (props?.path === "/cart" ? "#FFF" : "#000")};
 `;
