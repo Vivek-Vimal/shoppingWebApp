@@ -12,8 +12,6 @@ import { Button } from "../../../components/Button";
 const CommonAdd = (props) => {
   const { toggleButton } = props;
 
-  const token = window.localStorage.getItem("token");
-
   const obj = {
     url: "",
     title: "",
@@ -33,14 +31,14 @@ const CommonAdd = (props) => {
 
   const getFun = () => {
     setIsLoading(true);
-    AxiosGet({ endPoint, token })?.then((res) => {
+    AxiosGet({ endPoint })?.then((res) => {
       setIsLoading(false);
       setDisplayData(res?.data);
     });
   };
 
   const deleteApiCall = (_id) => {
-    axiosDelete({ endPoint, payload: { _id }, token })?.then((res) => {
+    axiosDelete({ endPoint, payload: { _id } })?.then((res) => {
       if (res?.status === 200) {
         //toast.success(res?.data);
         setTimeToFetchGet(() => !timeToFetchGet);
@@ -79,7 +77,7 @@ const CommonAdd = (props) => {
       case type?.product?.key:
         setTitle("Add Product");
         setPointName("product");
-        AxiosGet({ endPoint: "category", token })?.then((res) => {
+        AxiosGet({ endPoint: "category" })?.then((res) => {
           setCategoryData(res?.data);
         });
         setFormData(obj);

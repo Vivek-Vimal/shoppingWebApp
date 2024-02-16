@@ -1,17 +1,13 @@
-import axios from "axios";
-import { BASE_URL } from "../../constants";
+import { commonAxios } from "../Common";
 
 export const AxiosPost = async (props) => {
-  const { endPoint, payload, token } = props;
-  const formatToken = `Bearer ${token}`;
+  const { endPoint, payload } = props;
+
   try {
-    const res = await axios({
-      url: BASE_URL + endPoint,
+    const res = await commonAxios({
+      url: endPoint,
       method: "POST",
       data: payload,
-      headers: {
-        authorization: formatToken,
-      },
     });
     return res;
   } catch (err) {

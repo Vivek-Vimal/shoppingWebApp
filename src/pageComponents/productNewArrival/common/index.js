@@ -30,7 +30,6 @@ const CommonProduct = () => {
   const [filteredData, setFilteredData] = useState([]);
 
   const path = window.location.pathname;
-  const token = window.localStorage.getItem("token");
 
   const modalFun = (item) => {
     setIsModelOpen(true);
@@ -87,7 +86,7 @@ const CommonProduct = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    AxiosGet({ endPoint: "product", token })?.then((res) => {
+    AxiosGet({ endPoint: "product" })?.then((res) => {
       setIsLoading(false);
       setProductData(res?.data);
     });

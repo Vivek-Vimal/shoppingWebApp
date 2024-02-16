@@ -9,11 +9,9 @@ const BrandMaster = () => {
   const [brandImg, setBrandImg] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const token = window.localStorage.getItem("token");
-
   useEffect(() => {
     setIsLoading(true);
-    AxiosGet({ endPoint: "brand", token })?.then((res) => {
+    AxiosGet({ endPoint: "brand" })?.then((res) => {
       setIsLoading(false);
       setBrandImg(res?.data);
     });

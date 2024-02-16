@@ -25,8 +25,6 @@ const HomeMaster = () => {
     navigate("/product");
   };
 
-  const token = window.localStorage.getItem("token");
-
   const [slideImgData, setSlideImgData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
@@ -64,7 +62,7 @@ const HomeMaster = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    AxiosGet({ endPoint: "slideImg", token })?.then((res) => {
+    AxiosGet({ endPoint: "slideImg" })?.then((res) => {
       if (res?.status === 200) {
         setSlideImgData(res?.data);
         setIsLoading(false);

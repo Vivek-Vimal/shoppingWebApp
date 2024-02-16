@@ -1,16 +1,12 @@
-import axios from "axios";
-import { BASE_URL } from "../../constants";
+import { commonAxios } from "../Common";
 
-export const axiosDelete = async ({ endPoint, payload, token }) => {
-  const formatToken = `Bearer ${token}`;
+export const axiosDelete = async (props) => {
+  const { endPoint, payload } = props;
   try {
-    const res = await axios({
+    const res = await commonAxios({
       method: "DELETE",
-      url: BASE_URL + endPoint,
+      url: endPoint,
       data: payload,
-      headers: {
-        authorization: formatToken,
-      },
     });
     return res;
   } catch (err) {

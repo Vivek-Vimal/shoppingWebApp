@@ -1,18 +1,10 @@
-import axios from "axios";
-import { BASE_URL } from "../../constants";
+import { commonAxios } from "../Common";
 
-export const AxiosGet = async (props) => {
-  const { endPoint, token } = props;
-
-  const formatToken = `Bearer ${token}`;
-
+export const AxiosGet = async ({ endPoint }) => {
   try {
-    const res = await axios({
-      method: "get",
-      url: `${BASE_URL + endPoint}`,
-      headers: {
-        authorization: formatToken,
-      },
+    const res = await commonAxios({
+      method: "GET",
+      url: endPoint,
     });
     return res;
   } catch (err) {

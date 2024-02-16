@@ -11,11 +11,9 @@ const FilterAndSearchMaster = (props) => {
   const [categoryData, setCategoryData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const token = window.localStorage.getItem("token");
-
   useEffect(() => {
     setIsLoading(true);
-    AxiosGet({ endPoint: "category", token })?.then((res) => {
+    AxiosGet({ endPoint: "category" })?.then((res) => {
       setCategoryData(res?.data);
       setIsLoading(false);
     });

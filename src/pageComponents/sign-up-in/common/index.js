@@ -39,8 +39,6 @@ const SignUpIn = (props) => {
 
   const navigate = useNavigate();
 
-  const token = window.localStorage.getItem("token");
-
   const formObj = {
     userName: "",
     email: "",
@@ -84,7 +82,7 @@ const SignUpIn = (props) => {
       toast.error("Please fill all the required fields");
     } else {
       setIsLoading(true);
-      AxiosPost({ ...signInUpProps, token }).then((res) => {
+      AxiosPost({ ...signInUpProps }).then((res) => {
         setIsLoading(false);
         if (res?.status === 200) {
           window.localStorage.setItem("token", res?.data?.token);

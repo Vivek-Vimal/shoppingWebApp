@@ -13,6 +13,9 @@ const Box = styled.div`
   padding: 1rem;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
     rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   @media only screen and (max-width: 768px) {
     width: 98%;
   }
@@ -29,27 +32,29 @@ const Card = (props) => {
   const displayDesc = desc?.length > 100 ? desc?.slice(0, 100) + "..." : desc;
   return (
     <Box {...props}>
-      <Image>
-        <img
-          src={props?.img ? props?.img : ""}
-          alt=""
-          onClick={modalFun}
-          style={{
-            width: "100%",
-            height: "100%",
-            cursor: "pointer",
-            borderRadius: "1.75rem 1.75rem 0 0",
-          }}
-        />
-      </Image>
-      <div style={{ margin: "2rem 0 0 0" }}>
-        <Heading Text={displayTitle} fs="1.5rem" lh="2.5rem" />
-        <Text Text={displayDesc} lh="1.5rem" />
-        <Flex jc="space-between" m="0.5rem 0 0 0">
-          <Heading Text={props?.price} />
-          <Button onClick={props?.addToCart} text="add to cart" width="10rem" />
-        </Flex>
+      <div style={{ width: "100%" }}>
+        <Image>
+          <img
+            src={props?.img ? props?.img : ""}
+            alt=""
+            onClick={modalFun}
+            style={{
+              width: "100%",
+              height: "100%",
+              cursor: "pointer",
+              borderRadius: "1.75rem 1.75rem 0 0",
+            }}
+          />
+        </Image>
+        <div style={{ margin: "2rem 0 0 0" }}>
+          <Heading Text={displayTitle} fs="1.5rem" lh="2.5rem" />
+          <Text Text={displayDesc} lh="1.5rem" />
+        </div>
       </div>
+      <Flex jc="space-between" m="0.5rem 0 0 0">
+        <Heading Text={props?.price} />
+        <Button onClick={props?.addToCart} text="add to cart" width="10rem" />
+      </Flex>
     </Box>
   );
 };
