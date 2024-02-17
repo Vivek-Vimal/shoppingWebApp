@@ -31,7 +31,7 @@ const Card = (props) => {
   const displayTitle = title?.length > 20 ? title?.slice(0, 20) + "..." : title;
   const displayDesc = desc?.length > 100 ? desc?.slice(0, 100) + "..." : desc;
   return (
-    <Box {...props}>
+    <Box {...props} data-aos="flip-right">
       <div style={{ width: "100%" }}>
         <Image>
           <img

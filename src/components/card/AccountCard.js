@@ -4,8 +4,9 @@ import { Text } from "../Text";
 import { Heading } from "../Heading";
 import Flex from "../Styling/Flex";
 import { useWindowDimensions } from "../../hooks";
+import { motion } from "framer-motion";
 
-const StyledCard = styled.div`
+const StyledCard = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
   padding: 2rem;
 
@@ -20,7 +21,11 @@ const AccountCard = () => {
   const { width } = useWindowDimensions();
 
   return (
-    <StyledCard>
+    <StyledCard
+      data-aos="flip-left"
+      data-aos-easing="ease-out-cubic"
+      data-aos-duration="5000"
+    >
       <Flex mColumn noCenter>
         <Text Text={"Your_email : "} lh="2rem" />
         <Heading Text={userInfo} lh="2rem" m="0 0 0 0.5rem" sm="0" />

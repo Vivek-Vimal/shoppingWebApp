@@ -3,7 +3,6 @@ import { FiShoppingCart } from "react-icons/fi";
 import { AiOutlineAliwangwang } from "react-icons/ai";
 import { RiAccountPinCircleFill } from "react-icons/ri";
 import { CiMenuBurger } from "react-icons/ci";
-import { Link } from "react-router-dom";
 import { ImCross } from "react-icons/im";
 
 export const StyledNav = styled.nav`
@@ -18,8 +17,9 @@ export const StyledNav = styled.nav`
   background-color: rgba(255, 255, 255, 0.75);
 `;
 
-export const NavItem = styled(Link)`
+export const NavItem = styled.div`
   text-decoration: none;
+  cursor: pointer;
   @media only screen and (max-width: 768px) {
     margin: 1rem 2rem;
   }

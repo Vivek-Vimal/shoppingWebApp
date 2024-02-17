@@ -1,26 +1,31 @@
 import React from "react";
 import { NavItem } from "./NavbarCss";
+import { useNavigate } from "react-router-dom";
 
 const MenuContainer = () => {
   const path = window.location.pathname;
+  const navigate = useNavigate();
+  const router = (path) => {
+    navigate(path);
+  };
   return (
     <>
       <NavItem
-        to="/dashboard"
+        onClick={() => router("/dashboard")}
         style={{ color: path === "/dashboard" ? "green" : "#000" }}
       >
         DASHBOARD
       </NavItem>
 
       <NavItem
-        to="/product"
+        onClick={() => router("/product")}
         style={{ color: path === "/product" ? "green" : "#000" }}
       >
-        PRODUCT
+        CATEGORY
       </NavItem>
 
       <NavItem
-        to="/account"
+        onClick={() => router("/account")}
         style={{ color: path === "/account" ? "green" : "#000" }}
       >
         ACCOUNT

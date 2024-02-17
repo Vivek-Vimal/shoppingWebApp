@@ -8,6 +8,7 @@ import Spinner from "../../../components/Spinner";
 import { ImCross } from "react-icons/im";
 import toast from "react-hot-toast";
 import { Button } from "../../../components/Button";
+import { motion } from "framer-motion";
 
 const CommonAdd = (props) => {
   const { toggleButton } = props;
@@ -182,7 +183,13 @@ const CommonAdd = (props) => {
         )}
       </Flex>
 
-      <AddCommonCard {...commonCardProps} />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 5, delay: 0.5 }}
+      >
+        <AddCommonCard {...commonCardProps} />
+      </motion.div>
     </Flex>
   );
 };

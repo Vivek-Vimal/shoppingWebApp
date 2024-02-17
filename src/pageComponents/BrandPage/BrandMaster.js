@@ -4,6 +4,7 @@ import { PageWidth } from "../../components/Width";
 import Flex from "../../components/Styling/Flex";
 import { AxiosGet } from "../../api/components/GET";
 import Spinner from "../../components/Spinner";
+import { motion } from "framer-motion";
 
 const BrandMaster = () => {
   const [brandImg, setBrandImg] = useState([]);
@@ -26,7 +27,7 @@ const BrandMaster = () => {
             <Spinner m="3rem 0" />
           ) : (
             brandImg?.map((img) => (
-              <img
+              <motion.img
                 src={img?.url}
                 alt=""
                 style={{
@@ -34,6 +35,14 @@ const BrandMaster = () => {
                   height: "5rem",
                   margin: "2rem",
                   borderRadius: "0.25rem",
+                  cursor: "pointer",
+                }}
+                initial={{ x: 0, y: 5 }}
+                animate={{ x: 0, y: -5 }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: "reverse",
                 }}
               />
             ))

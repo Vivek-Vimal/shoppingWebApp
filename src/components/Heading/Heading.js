@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-const StyledHeading = styled.h1`
+const StyledHeading = styled(motion.h1)`
   font-size: ${(props) => (props.fs ? props.fs : "28px")};
   font-weight: ${(props) => (props.fw ? props.fw : "700")};
   line-height: ${(props) => (props.lh ? props.lh : 0)};
@@ -53,8 +54,17 @@ const StyledHeading = styled.h1`
 `;
 
 const Heading = (props) => {
+  const { Text, initialX, animateX, initialY, animateY, duration, delay } =
+    props;
   return (
-    <StyledHeading {...props}>{props.Text ? props.Text : ""}</StyledHeading>
+    <StyledHeading
+      {...props}
+      initial={{ x: initialX, y: initialY }}
+      animate={{ x: animateX, y: animateY }}
+      transition={{ duration: duration, delay: delay }}
+    >
+      {Text ? Text : ""}
+    </StyledHeading>
   );
 };
 

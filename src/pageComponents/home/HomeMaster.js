@@ -87,7 +87,7 @@ const HomeMaster = () => {
     <PageLayout>
       <PageWidth bg="#F4F6F5" boxShadow padding="3rem 0" margin="0 0 2rem 0">
         <ResponsiveConatiner>
-          <LeftHeroSec>
+          <LeftHeroSec data-aos="fade-right">
             <HeadingConatiner>
               <Heading Text="LET'S" {...commonCss} mWidth="4rem" />
               <Heading Text="EXPLORE" {...commonCss} mWidth="6.5rem" />
@@ -102,7 +102,7 @@ const HomeMaster = () => {
 
             <Button text="Shop Now" m="1rem 0 0 0" onClick={onClick} />
           </LeftHeroSec>
-          <RightHeroSec isLoading={isLoading}>
+          <RightHeroSec isLoading={isLoading} data-aos="fade-left">
             {isLoading ? (
               <Spinner />
             ) : (

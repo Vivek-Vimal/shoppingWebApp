@@ -12,14 +12,15 @@ import { useNavigate } from "react-router-dom";
 import { Checkbox } from "../../../components/Checkbox";
 
 const StyledSignUp = styled.form`
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   display: flex;
   flex-direction: column;
   padding: 3rem;
   position: relative;
   border-radius: 1rem;
+  border: 1px solid #fff;
 
   @media only screen and (max-width: 548px) {
     padding: 3rem 1rem 1rem 1rem;
@@ -110,24 +111,22 @@ const SignUpIn = (props) => {
           isUpIn === "signUp" ? setIsUpIn("signIn") : setIsUpIn("signUp")
         }
       >
-        <Text
-          Text={isUpIn === "signUp" ? "Sign In" : "Sign Up"}
-          color="#0096FF"
-        />
+        <Text Text={isUpIn === "signUp" ? "Sign In" : "Sign Up"} color="#FFF" />
       </SignIN>
 
       <Heading
         Text={isUpIn === "signIn" ? "Sign In" : "Sign Up"}
         center
         m="0 0 2rem 0"
+        color="#FFF"
       />
 
       {isUpIn === "signUp" && (
         <>
           <div style={{ margin: margin }}>
             <Flex>
-              <Text Text="User Name" lh="2.5rem" />
-              <TiStar />
+              <Text Text="User Name" lh="2.5rem" color="#FFF" />
+              <TiStar color="#FFF" />
             </Flex>
             <Input
               name="userName"
@@ -143,8 +142,8 @@ const SignUpIn = (props) => {
 
       <div style={{ margin: margin }}>
         <Flex>
-          <Text Text="E-Mail" lh="2.5rem" />
-          <TiStar />
+          <Text Text="E-Mail" lh="2.5rem" color="#FFF" />
+          <TiStar color="#FFF" />
         </Flex>
         <Input
           name="email"
@@ -159,12 +158,12 @@ const SignUpIn = (props) => {
       <div style={{ margin: margin }}>
         <Flex jc="space-between">
           <Flex>
-            <Text Text="Password" lh="2.5rem" />
+            <Text Text="Password" lh="2.5rem" color="#FFF" />
 
-            <TiStar />
+            <TiStar color="#FFF" />
           </Flex>
           <Flex width="5rem">
-            <Text transform="capitalize" Text={"Show"} />
+            <Text transform="capitalize" Text={"Show"} color="#FFF" />
             <Checkbox
               id={1}
               name={"showHidePass"}

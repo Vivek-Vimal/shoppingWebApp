@@ -51,6 +51,10 @@ const Navbar = () => {
     setIsAccountCard(() => false);
   };
 
+  const onHome = () => {
+    navigate("/home");
+  };
+
   const accountCardProp = {
     onAccount,
     setIsAccountCard,
@@ -59,7 +63,7 @@ const Navbar = () => {
   return (
     <>
       <StyledNav>
-        <NavItem to="/home">
+        <NavItem onClick={onHome}>
           <Flex width="20rem" mWidth="15rem" m10Width="10rem" xsw="100%">
             <HomeIcon color={path === "/home" ? "green" : "#000"} />
             <Heading

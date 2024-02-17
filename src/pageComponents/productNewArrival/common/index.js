@@ -12,6 +12,8 @@ import { FilterAndSearchMaster } from "../../../components/FilterAndSearch";
 import { AxiosGet } from "../../../api/components/GET";
 import { useDispatch } from "react-redux";
 import Spinner from "../../../components/Spinner";
+import { Pagination } from "../../../components/Pagination";
+import { motion } from "framer-motion";
 
 const CommonProduct = () => {
   const dispatch = useDispatch();
@@ -28,6 +30,11 @@ const CommonProduct = () => {
 
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [typeData, setTypeData] = useState([]);
+  const [change, setChange] = useState(false);
 
   const path = window.location.pathname;
 
@@ -55,7 +62,8 @@ const CommonProduct = () => {
           filterData?.push(item)
       );
 
-      setDisplayProductData([...filterData]);
+      setTypeData([...filterData]);
+      totalPageCount(filterData?.length);
     }
   };
 
@@ -84,6 +92,20 @@ const CommonProduct = () => {
     }
   };
 
+  const totalPageCount = (len) => {
+    setChange(() => !change);
+    setTotalPages(len > 4 ? Math.floor(len / 4) + 1 : 1);
+  };
+
+  const displayProd = (data) => {
+    if (data?.length > 0) {
+      if (currentPage) {
+        let count = 4 * (currentPage - 1);
+        setDisplayProductData(data?.slice(count, count + 4));
+      }
+    }
+  };
+
   useEffect(() => {
     setIsLoading(true);
     AxiosGet({ endPoint: "product" })?.then((res) => {
@@ -96,7 +118,8 @@ const CommonProduct = () => {
   useEffect(() => {
     if (productData?.length > 0) {
       if (path === "/product") {
-        setDisplayProductData([...productData]);
+        setTypeData([...productData]);
+        totalPageCount(productData?.length);
       } else {
         setDisplayProductData(productData?.slice(0, 3));
       }
@@ -107,10 +130,12 @@ const CommonProduct = () => {
   useEffect(() => {
     if (!searchinput) {
       if (selectedCategory?.find((e) => e?.isChecked)) {
-        setDisplayProductData([...filteredData]);
+        setTypeData([...filteredData]);
+        totalPageCount(filteredData?.length);
       } else {
         if (isSearchClicked?.searchButton) {
-          setDisplayProductData([...productData]);
+          setTypeData([...productData]);
+          totalPageCount(productData?.length);
         }
       }
     }
@@ -131,18 +156,31 @@ const CommonProduct = () => {
           : null
       );
       setFilteredData([...updatedArr]);
-      setDisplayProductData([...updatedArr]);
+      setTypeData([...updatedArr]);
+      totalPageCount(updatedArr?.length);
     } else if (isSearchClicked?.checkboxButton) {
-      setDisplayProductData([...productData]);
+      setTypeData([...productData]);
+      totalPageCount(productData?.length);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
+
+  useEffect(() => {
+    displayProd(typeData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, change]);
 
   const searchFilterProps = {
     onSearch,
     onChange,
     onCheckboxChange,
     searchinput,
+  };
+
+  const paginationProps = {
+    currentPage,
+    setCurrentPage,
+    totalPages,
   };
 
   return (
@@ -156,9 +194,21 @@ const CommonProduct = () => {
           />
         </Flex>
         {path === "/product" && (
-          <FilterAndSearchMaster {...searchFilterProps} />
+          <motion.div
+            style={{ width: "100%" }}
+            initial={{ x: "100vw" }}
+            animate={{ x: 0 }}
+            transition={{ duration: 2.5, delay: 0.5 }}
+          >
+            <FilterAndSearchMaster {...searchFilterProps} />
+          </motion.div>
         )}
-        <Flex wrap jc={isLoading ? "center" : ""} align="stretch">
+        <Flex
+          wrap
+          jc={isLoading ? "center" : ""}
+          align="stretch"
+          m="1rem 0 2rem 0"
+        >
           {isLoading ? (
             <Spinner m="5rem 0 0 0" />
           ) : displayProductData?.length > 0 ? (
@@ -196,6 +246,7 @@ const CommonProduct = () => {
             <DetailCard currentItem={currentItem} />
           </Modal>
         </Flex>
+        {path === "/product" && <Pagination {...paginationProps} />}
       </PageWidth>
     </PageLayout>
   );

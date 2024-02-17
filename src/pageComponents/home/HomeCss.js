@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export const LeftHeroSec = styled.div`
+export const LeftHeroSec = styled(motion.div)`
   width: auto;
 
   @media only screen and (max-width: 768px) {
@@ -9,7 +10,7 @@ export const LeftHeroSec = styled.div`
   }
 `;
 
-export const RightHeroSec = styled.div`
+export const RightHeroSec = styled(motion.div)`
   display: grid;
   place-items: center;
   width: 600px;
